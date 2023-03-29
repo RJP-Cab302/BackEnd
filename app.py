@@ -12,10 +12,14 @@ def index():
 
 @app.route('/example', methods=['GET','POST'])
 def example_end_point():
+    '''Example api end point, for both GET and POST methods.
+    Incoming JSON via the POST method is in the form of a dictionary.
+    '''
+    
     if request.method == 'GET':
         print("GET")
         return json.dumps({'name': 'test message',
-                       'message': 'The API is working'})
+                       'message': 'The API is working, this is sample JSON'})
 
     if request.method == 'POST':
         content_type = request.headers.get('Content-Type')
