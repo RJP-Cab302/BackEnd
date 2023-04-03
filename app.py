@@ -4,10 +4,14 @@ import json
 import jwt
 from functools import wraps
 from flask import Flask, request, make_response
+from flask_cors import CORS, cross_origin
 from appauth import auth_required 
 from constraints import SECRET_KEY
 
 app = Flask(__name__)
+
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 #To be replaced with a database, (<Login> : <Password>)
@@ -16,11 +20,13 @@ users = {"james@user.com" : "Password"}
 
 
 @app.route('/')
+@cross_origin()
 def index():
     return json.dumps({'name': 'test message',
                        'message': 'The API is working'})
 
 @app.route('/example', methods=['GET','POST'])
+@cross_origin()
 def example_end_point():
     '''Example api end point, for both GET and POST methods.
     Incoming JSON via the POST method is in the form of a dictionary.
@@ -43,6 +49,7 @@ def example_end_point():
                         'message': 'Content is not supported'})
 
 @app.route('/protected', methods=['POST'])
+@cross_origin()
 @auth_required
 def protected():
     return json.dumps({'message':'This place is only for those with a auth token',
@@ -50,6 +57,7 @@ def protected():
 
 
 @app.route('/login')
+@cross_origin()
 def login():
     auth = request.authorization
     if not auth:
