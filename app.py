@@ -4,10 +4,14 @@ import json
 import jwt
 from functools import wraps
 from flask import Flask, request, make_response
+from flask_cors import CORS, cross_origin
 from appauth import auth_required 
 from constraints import SECRET_KEY
 
 app = Flask(__name__)
+
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 #To be replaced with a database, (<Login> : <Password>)
@@ -16,6 +20,7 @@ users = {"james@user.com" : "Password"}
 
 
 @app.route('/')
+@cross_origin()
 def index():
     return json.dumps({'name': 'test message',
                        'message': 'The API is working'})
