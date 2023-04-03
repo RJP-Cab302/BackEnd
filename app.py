@@ -26,6 +26,7 @@ def index():
                        'message': 'The API is working'})
 
 @app.route('/example', methods=['GET','POST'])
+@cross_origin()
 def example_end_point():
     '''Example api end point, for both GET and POST methods.
     Incoming JSON via the POST method is in the form of a dictionary.
@@ -48,6 +49,7 @@ def example_end_point():
                         'message': 'Content is not supported'})
 
 @app.route('/protected', methods=['POST'])
+@cross_origin()
 @auth_required
 def protected():
     return json.dumps({'message':'This place is only for those with a auth token',
@@ -55,6 +57,7 @@ def protected():
 
 
 @app.route('/login')
+@cross_origin()
 def login():
     auth = request.authorization
     if not auth:
