@@ -72,6 +72,39 @@ def login():
     token = jwt.encode({'user': auth.username, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=5)},SECRET_KEY,algorithm="HS256")
     return json.dumps({'token': token})
 
+@app.route('/signup', methods=['POST'])
+@cross_origin()
+def signup():
+    #TODO: Sign up should only take an email as a username
+    
+    if request.method == 'POST':
+        content_type = request.headers.get('Content-Type')
+
+    if (content_type == 'application/json'):
+        json_message = request.json
+
+        if "username" not in json_message.keys() or "password" not in json_message.keys():
+            response = app.response_class(json.dumps({"message":"Umm you haven't formatted the request correctly", "code":401}),
+                    status=401,
+                    mimetype='application/json')
+            return response
+
+        if json_message["username"] in users.keys():
+            response = app.response_class(json.dumps({"message":"User already exists", "code":401}),
+                    status=401,
+                    mimetype='application/json')
+            return response
+        
+        users.update({json_message["username"]: json_message["password"]})
+        response = app.response_class(json.dumps({"message":"Sign up successful", "code":200}),
+                                status=200,
+                                mimetype='application/json')
+
+        return response
+    else:
+        return json.dumps({'ERROR': 'Error',
+                    'message': 'Content is not supported'})
+
 
 if __name__ == '__main__':
     app.run(port=8080)
