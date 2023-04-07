@@ -6,17 +6,12 @@ from flask import Flask, request, make_response
 from flask_cors import CORS, cross_origin
 from appauth import auth_required 
 from constraints import SECRET_KEY
+from database import add_user_to_database, check_user_password_in_database
 
 app = Flask(__name__)
 
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
-
-
-#To be replaced with a database, (<Login> : <Password>)
-users = {"james@user.com" : "Password"}
-#End To be replaced with a database
-
 
 @app.route('/')
 @cross_origin()
@@ -61,11 +56,8 @@ def login():
     auth = request.authorization
     if not auth:
         return json.dumps({"message" : "Basic authorization required, need username and password"})
-    
-    if auth.username not in users.keys():
-        return json.dumps({"message" : "Username or password invalid"})
 
-    if users[auth.username] != auth.password:
+    if not check_user_password_in_database(auth.username, auth.password):
         return json.dumps({"message" : "Username or password invalid"})
     
     token = jwt.encode({'user': auth.username, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=5)},SECRET_KEY,algorithm="HS256")
@@ -87,14 +79,8 @@ def signup():
                     status=401,
                     mimetype='application/json')
             return response
-
-        if json_message["username"] in users.keys():
-            response = app.response_class(json.dumps({"message":"User already exists", "code":401}),
-                    status=401,
-                    mimetype='application/json')
-            return response
         
-        users.update({json_message["username"]: json_message["password"]})
+        add_user_to_database(json_message["username"], json_message["password"])
         response = app.response_class(json.dumps({"message":"Sign up successful", "code":200}),
                                 status=200,
                                 mimetype='application/json')
