@@ -6,7 +6,7 @@ from flask import Flask, request, make_response
 from flask_cors import CORS, cross_origin
 from appauth import auth_required 
 from constraints import SECRET_KEY
-from database import add_user_to_database, check_user_password_in_database
+from database import add_user_to_database, check_user_password_in_database, delete_user_from_database
 
 app = Flask(__name__)
 
@@ -80,15 +80,45 @@ def signup():
                     mimetype='application/json')
             return response
         
-        add_user_to_database(json_message["username"], json_message["password"])
-        response = app.response_class(json.dumps({"message":"Sign up successful", "code":200}),
-                                status=200,
-                                mimetype='application/json')
+        if(add_user_to_database(json_message["username"], json_message["password"])):
+            response = app.response_class(json.dumps({"message":"Sign up successful", "code":200}),
+                                    status=200,
+                                    mimetype='application/json')
+        else:
+            response = app.response_class(json.dumps({"message":"Sign up failed, user might already exist", "code":401}),
+                                    status=401,
+                                    mimetype='application/json')
 
         return response
     else:
         return json.dumps({'ERROR': 'Error',
                     'message': 'Content is not supported'})
+
+@app.route('/delete', methods=['DELETE'])
+@cross_origin()
+@auth_required
+def delete():
+    """To delete a user account
+    """
+    if request.method == 'DELETE':
+        content_type = request.headers.get('Content-Type')
+
+    if (content_type == 'application/json'):
+        json_message = request.json
+    
+    auth = request.authorization
+    if not auth:
+        return json.dumps({"message" : "Basic authorization required, need username and password"})
+
+    if not check_user_password_in_database(auth.username, auth.password):
+        return json.dumps({"message" : "Username or password invalid"})
+    
+    if delete_user_from_database(auth.username):
+        response = app.response_class(json.dumps({"message":"Delete successful", "code":200}),
+                                    status=200,
+                                    mimetype='application/json')
+    
+    return response
 
 
 if __name__ == '__main__':
