@@ -68,12 +68,18 @@ def login():
 @cross_origin()
 def signup():
     #TODO: Sign up should only take an email as a username
-    
+    users_emails = ['gmail.com', 'yahoo.com','icloud.com', 'outlook.com']
+    username_email = request.form['username'].split('@')[-1]
     if request.method == 'POST':
         content_type = request.headers.get('Content-Type')
 
     if (content_type == 'application/json'):
         json_message = request.json
+        if username_email not in users_emails:
+            response = app.response_class(json.dumps({"message":"Umm you haven't entered a valid email address", "code":401}),
+                    status=401,
+                    mimetype='application/json')
+            return response
 
         if "username" not in json_message.keys() or "password" not in json_message.keys():
             response = app.response_class(json.dumps({"message":"Umm you haven't formatted the request correctly", "code":401}),
