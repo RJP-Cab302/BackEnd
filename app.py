@@ -69,13 +69,15 @@ def login():
 def signup():
     #TODO: Sign up should only take an email as a username
     users_emails = ['gmail.com', 'yahoo.com','icloud.com', 'outlook.com']
+    types = ['tourist', 'local_council','business', 'residen']
     username_email = request.form['username'].split('@')[-1]
+
     if request.method == 'POST':
         content_type = request.headers.get('Content-Type')
 
     if (content_type == 'application/json'):
         json_message = request.json
-        if username_email not in users_emails:
+        if username_email not in users_emails.keys():
             response = app.response_class(json.dumps({"message":"Umm you haven't entered a valid email address", "code":401}),
                     status=401,
                     mimetype='application/json')
@@ -87,7 +89,19 @@ def signup():
                     mimetype='application/json')
             return response
         
-        if(add_user_to_database(json_message["username"], json_message["password"])):
+        if "userType" not in types.keys():
+            response = app.response_class(json.dumps({"message":"Umm you haven't selected a user type", "code":400}),
+                    status=400,
+                    mimetype='application/json')
+            return response
+
+        if "userAddress" not in json_message.keys():
+            response = app.response_class(json.dumps({"message":"Umm you haven't entered a home address", "code":400}),
+                    status=400,
+                    mimetype='application/json')
+            return response
+
+        if(add_user_to_database(json_message["username"], json_message["password"], json_message["userType"]), json_message["userAddress"]):
             response = app.response_class(json.dumps({"message":"Sign up successful", "code":200}),
                                     status=200,
                                     mimetype='application/json')
