@@ -14,7 +14,7 @@ def create_database(db_name):
     connection = connect(database=db_name)
     db = connection.cursor()
 
-    db.execute("CREATE TABLE Users(UserId INTEGER UNIQUE primary key AUTOINCREMENT, UserName TEXT UNIQUE, UserPassword TEXT(200), Name TEXT, UserType INTEGER);")
+    db.execute("CREATE TABLE Users(UserId INTEGER UNIQUE primary key AUTOINCREMENT, UserName TEXT UNIQUE, UserPassword TEXT(200), Name TEXT, UserType INTEGER, UserAddress TEXT UNIQUE);")
     db.execute("CREATE TABLE BookingData(Year INTEGER, Day INTEGER, BaseFare FLOAT, TotalSpaces INTEGER, SpacesSold INTEGER, MaxPrice FLOAT, MinPrice FLOAT, DaysForSale INTEGER, CONSTRAINT  PKYearDay Primary Key (Year, Day));")
 
     connection.commit()
@@ -47,6 +47,29 @@ def add_user_to_database(user_name, user_password):
         return True
     except IntegrityError:
         print("Username already in database")
+        return False
+    except:
+        print("Something else went wrong")
+        return False
+    
+def update_user_address_to_database(user_name, user_address):
+    global db_file
+
+    if not path.exists(db_file):
+        create_database(db_file)
+    connection = connect(database=db_file)
+    db = connection.cursor()
+
+    sql_instruction = f"UPDATE Users SET UserAddress = '{user_address}' WHERE UserName = '{user_name}';"
+
+    try:
+        db.execute(sql_instruction)
+        connection.commit()
+        db.close()
+        connection.close()
+        return True
+    except IntegrityError:
+        print("User's address already in database")
         return False
     except:
         print("Something else went wrong")
@@ -258,10 +281,11 @@ def get_booking_data_sold_spaces(year, day):
 
 
 if __name__ == "__main__":
-    #print(add_user_to_database("jim@user.com","password"))
+    #print(add_user_to_database("jim@user.com", "password"))
+    #print(update_user_address_to_database("jim@user.com","124 wfqwn jnfq"))
     #print(check_user_password_in_database("tom@user.com","password"))
     #print(delete_user_from_database("tim@user.com"))
     #create_booking_data(2023,120,50,99,30,400,5)
-    print(change_booking_data_sold_spaces(2023,113,50))
+    #print(change_booking_data_sold_spaces(2023,113,50))
     #print(get_booking_data_sold_spaces(2023, 120))
 
