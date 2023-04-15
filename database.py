@@ -281,11 +281,10 @@ def get_booking_data_sold_spaces(year, day):
 
 
 if __name__ == "__main__":
-    #print(add_user_to_database("jim@user.com", "password"))
+    print(add_user_to_database("jim@user.com", "password"))
     #print(update_user_address_to_database("jim@user.com","124 wfqwn jnfq"))
     #print(check_user_password_in_database("tom@user.com","password"))
     #print(delete_user_from_database("tim@user.com"))
     #create_booking_data(2023,120,50,99,30,400,5)
     #print(change_booking_data_sold_spaces(2023,113,50))
     #print(get_booking_data_sold_spaces(2023, 120))
-

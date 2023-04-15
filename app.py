@@ -69,6 +69,7 @@ def login():
 def signup():
     #TODO: Sign up should only take an email as a username
     username_email = request.form['username']
+
     if request.method == 'POST':
         content_type = request.headers.get('Content-Type')
 
@@ -90,6 +91,7 @@ def signup():
 
             if(json_message["useraddress"] != None): #not sure if that's will work, to be double checked
                 update_user_address_to_database(json_message["username"], json_message["useraddress"])
+                
             response = app.response_class(json.dumps({"message":"Sign up successful", "code":200}),
                                     status=200,
                                     mimetype='application/json')
