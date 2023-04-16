@@ -47,9 +47,13 @@ def add_user_to_database(user_name, user_password):
         return True
     except IntegrityError:
         print("Username already in database")
+        db.close()
+        connection.close()
         return False
     except:
         print("Something else went wrong")
+        db.close()
+        connection.close()
         return False
     
 def update_user_address_to_database(user_name, user_address):
@@ -57,6 +61,7 @@ def update_user_address_to_database(user_name, user_address):
 
     if not path.exists(db_file):
         create_database(db_file)
+
     connection = connect(database=db_file)
     db = connection.cursor()
 
@@ -69,10 +74,15 @@ def update_user_address_to_database(user_name, user_address):
         connection.close()
         return True
     except IntegrityError:
+        #TODO: is this error correct? Do we need to just update the address?
         print("User's address already in database")
+        db.close()
+        connection.close()
         return False
     except:
         print("Something else went wrong")
+        db.close()
+        connection.close()
         return False
 
 def hash_password(password):
