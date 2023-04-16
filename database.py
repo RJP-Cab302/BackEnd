@@ -142,6 +142,33 @@ def check_user_password_in_database(entered_user_name, entered_user_password):
     print("Password does not match")
     return False
 
+def password_reset(userName,new_password, old_password):
+    global db_file
+
+    if not path.exists(db_file):
+        print("Database does not exist")
+        return False
+
+    user_password_hashed = str(hash_password(new_password))
+
+    connection = connect(database=db_file)
+    db = connection.cursor()
+
+    sql_instruction = f"UPDATE Users SET UserPassword = '{user_password_hashed}' WHERE UserName = '{userName}';"
+    if(check_user_password_in_database(userName, old_password)):
+        db.execute(sql_instruction)
+        connection.commit()
+        db.close()
+        connection.close()
+        return True
+    else:
+        print("Old password does not match, please try again")
+        return False
+        
+
+
+
+
 def delete_user_from_database(user_name):
     """Deletes a user fron the database.
     @param user_name: string of the user to be deleted.
@@ -291,10 +318,12 @@ def get_booking_data_sold_spaces(year, day):
 
 
 if __name__ == "__main__":
-    print(add_user_to_database("jim@user.com", "password"))
-    #print(update_user_address_to_database("jim@user.com","124 wfqwn jnfq"))
-    #print(check_user_password_in_database("tom@user.com","password"))
+
+    print(add_user_to_database("jim@user.com","password"))
+    #print(check_user_password_in_database("jim@user.com","password"))
     #print(delete_user_from_database("tim@user.com"))
     #create_booking_data(2023,120,50,99,30,400,5)
     #print(change_booking_data_sold_spaces(2023,113,50))
     #print(get_booking_data_sold_spaces(2023, 120))
+    print(password_reset("jim@user.com","change","password"))
+
