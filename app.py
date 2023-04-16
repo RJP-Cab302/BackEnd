@@ -6,9 +6,9 @@ from flask import Flask, request, make_response
 from flask_cors import CORS, cross_origin
 from appauth import auth_required 
 from constraints import SECRET_KEY
-from database import add_user_to_database, check_user_password_in_database, delete_user_from_database, create_booking_data, get_booking_data_sold_spaces
+from database import add_user_to_database, check_user_password_in_database, delete_user_from_database, create_booking_data, get_booking_data_sold_spaces, update_user_address_to_database
 from yield_management import Fare_Calculator
-
+from email_validator import validate_email, EmailNotValidError
 app = Flask(__name__)
 
 cors = CORS(app)
@@ -67,13 +67,12 @@ def login():
 @app.route('/signup', methods=['POST'])
 @cross_origin()
 def signup():
-    #TODO: Sign up should only take an email as a username
-    
+
     if request.method == 'POST':
         content_type = request.headers.get('Content-Type')
 
     if (content_type == 'application/json'):
-        json_message = request.json
+        json_message = request.json        
 
         if "username" not in json_message.keys() or "password" not in json_message.keys():
             response = app.response_class(json.dumps({"message":"Umm you haven't formatted the request correctly", "code":401}),
@@ -81,14 +80,28 @@ def signup():
                     mimetype='application/json')
             return response
         
+
+        if not check_email(json_message["username"]):
+            response = app.response_class(json.dumps({"message":"Umm you haven't entered a valid email address", "code":422}),
+                    status=422,
+                    mimetype='application/json')
+            return response   
+
+        
         if(add_user_to_database(json_message["username"], json_message["password"])):
+                
             response = app.response_class(json.dumps({"message":"Sign up successful", "code":200}),
                                     status=200,
                                     mimetype='application/json')
+     
         else:
             response = app.response_class(json.dumps({"message":"Sign up failed, user might already exist", "code":401}),
                                     status=401,
                                     mimetype='application/json')
+        
+        #TODO: The address works, better if it is here, better if it is its own API endpoint. But we can leave it here for now.
+        if("useraddress" in json_message.keys() and json_message["useraddress"] != None): #not sure if that's will work, to be double checked
+                update_user_address_to_database(json_message["username"], json_message["useraddress"])
 
         return response
     else:
@@ -238,5 +251,16 @@ def get_day_price_endpoint():
     
     return response
 
+
+def check_email(email):
+    try:    
+        emailinfo = validate_email(email, check_deliverability=False)  
+        return True
+    except EmailNotValidError:
+        return False
+
 if __name__ == '__main__':
+    
     app.run(port=8080)
+    
+    
