@@ -16,6 +16,7 @@ def create_database(db_name):
 
     db.execute("CREATE TABLE Users(UserId INTEGER UNIQUE primary key AUTOINCREMENT, UserName TEXT UNIQUE, UserPassword TEXT(200), Name TEXT, UserType INTEGER, UserAddress TEXT UNIQUE);")
     db.execute("CREATE TABLE BookingData(Year INTEGER, Day INTEGER, BaseFare FLOAT, TotalSpaces INTEGER, SpacesSold INTEGER, MaxPrice FLOAT, MinPrice FLOAT, DaysForSale INTEGER, CONSTRAINT  PKYearDay Primary Key (Year, Day));")
+    db.execute("CREATE TABLE BookingTable(BookingId INTEGER UNIQUE primary key AUTOINCREMENT,UserId INTEGER UNIQUE, vehicleRego TEXT UNIQUE, Year INTEGER, Day INTEGER)")
 
     connection.commit()
 
@@ -316,9 +317,15 @@ def get_booking_data_sold_spaces(year, day):
 
     return rows[0]
 
-
+"""
+used to test booking table database
+sql_instruction1 = f"INSERT INTO BookingTable(UserId, vehicleRego, Year, Day) VALUES ('1', 'reer', '2023', '23');"
+    db.execute(sql_instruction1)
+    connection.commit()
+    db.close()
+"""
 if __name__ == "__main__":
-
+    
     print(add_user_to_database("jim@user.com","password"))
     #print(check_user_password_in_database("jim@user.com","password"))
     #print(delete_user_from_database("tim@user.com"))
