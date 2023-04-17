@@ -362,7 +362,6 @@ def adjust_prices(year, day, new_base_fare):
         
 if __name__ == "__main__":
     #print(add_user_to_database("jim@user.com","password"))
-    #print(add_user_to_database("jim@user.com","password"))
     #print(check_user_password_in_database("jim@user.com","password"))
     #print(delete_user_from_database("tim@user.com"))
     create_booking_data(2023,120,50,99,30,400,5)
