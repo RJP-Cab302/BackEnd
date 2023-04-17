@@ -166,9 +166,6 @@ def password_reset(userName,new_password, old_password):
         return False
         
 
-
-
-
 def delete_user_from_database(user_name):
     """Deletes a user fron the database.
     @param user_name: string of the user to be deleted.
@@ -316,14 +313,60 @@ def get_booking_data_sold_spaces(year, day):
 
     return rows[0]
 
+def adjust_base_fare(year, day, new_base_fare):
+    """Adjust the base fare price of a chosen date.
+    @param year: number of the year of the chosen date.
+    @param day: number of the chosen date.
+    @param new_base_fare: number of the new price of the chosen date.
+    @return: true if the operation was successful
+    """
+    global db_file
 
+    if not path.exists(db_file):
+        print("Database does not exist")
+        return False
+
+    connection = connect(database=db_file)
+    db = connection.cursor()
+
+    sql_instruction1 = f"SELECT MinPrice, MaxPrice, BaseFare FROM BookingData WHERE Year = '{year}' and Day = '{day}';"
+    db.execute(sql_instruction1)
+    rows = db.fetchall()
+
+    sql_instruction = f"UPDATE BookingData SET BaseFare = '{new_base_fare}' WHERE Year = '{year}' and Day = '{day}';"
+
+    if rows:
+        if(new_base_fare == rows[0][2]):
+            db.close()
+            connection.close()
+            print("You have entered the current price")
+            return False
+        elif(rows[0][0] <= new_base_fare and new_base_fare <= rows[0][1]):
+            db.execute(sql_instruction)
+            connection.commit()
+            db.close()
+            connection.close()
+            print("Price have been changed")
+            return True
+        elif(rows[0][0] > new_base_fare or new_base_fare > rows[0][1]):
+            db.close()
+            connection.close()
+            print(f"The chosen price should be between {rows[0][0]} and {rows[0][1]}")
+            return False         
+    else:
+        print("The chosen date is not valid")
+        db.close()
+        connection.close()
+        return False
+    
+        
 if __name__ == "__main__":
-
-    print(add_user_to_database("jim@user.com","password"))
+    #print(add_user_to_database("jim@user.com","password"))
     #print(check_user_password_in_database("jim@user.com","password"))
     #print(delete_user_from_database("tim@user.com"))
-    #create_booking_data(2023,120,50,99,30,400,5)
+    create_booking_data(2023,120,50,99,30,400,5)
+    adjust_base_fare(2023, 120, 150)
     #print(change_booking_data_sold_spaces(2023,113,50))
     #print(get_booking_data_sold_spaces(2023, 120))
-    print(password_reset("jim@user.com","change","password"))
+    #print(password_reset("jim@user.com","change","password"))
 
