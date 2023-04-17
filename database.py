@@ -11,12 +11,19 @@ def create_database(db_name):
     BookingData: Year, Day, BaseFare, TotalSpaces, SpacesSold, DaysForSale
     @param db_name(string): name of the database to be created
     """
+    """
+    used to test booking table database
+    sql_instruction1 = f"INSERT INTO BookingTable(UserId, vehicleRego, Year, Day, Price) VALUES ('1', 'reer', '2023', '23', "40.29");"
+    db.execute(sql_instruction1)
+    connection.commit()
+    db.close()
+    """
     connection = connect(database=db_name)
     db = connection.cursor()
 
     db.execute("CREATE TABLE Users(UserId INTEGER UNIQUE primary key AUTOINCREMENT, UserName TEXT UNIQUE, UserPassword TEXT(200), Name TEXT, UserType INTEGER, UserAddress TEXT UNIQUE);")
     db.execute("CREATE TABLE BookingData(Year INTEGER, Day INTEGER, BaseFare FLOAT, TotalSpaces INTEGER, SpacesSold INTEGER, MaxPrice FLOAT, MinPrice FLOAT, DaysForSale INTEGER, CONSTRAINT  PKYearDay Primary Key (Year, Day));")
-    db.execute("CREATE TABLE BookingTable(BookingId INTEGER UNIQUE primary key AUTOINCREMENT,UserId INTEGER UNIQUE, vehicleRego TEXT UNIQUE, Year INTEGER, Day INTEGER)")
+    db.execute("CREATE TABLE BookingTable(BookingId INTEGER UNIQUE primary key AUTOINCREMENT,UserId INTEGER UNIQUE, vehicleRego TEXT, Year INTEGER, Day INTEGER, Price FLOAT)")
 
     connection.commit()
 
@@ -317,20 +324,13 @@ def get_booking_data_sold_spaces(year, day):
 
     return rows[0]
 
-"""
-used to test booking table database
-sql_instruction1 = f"INSERT INTO BookingTable(UserId, vehicleRego, Year, Day) VALUES ('1', 'reer', '2023', '23');"
-    db.execute(sql_instruction1)
-    connection.commit()
-    db.close()
-"""
+
 if __name__ == "__main__":
-    
-    print(add_user_to_database("jim@user.com","password"))
+    #print(add_user_to_database("jim@user.com","password"))
     #print(check_user_password_in_database("jim@user.com","password"))
     #print(delete_user_from_database("tim@user.com"))
     #create_booking_data(2023,120,50,99,30,400,5)
     #print(change_booking_data_sold_spaces(2023,113,50))
     #print(get_booking_data_sold_spaces(2023, 120))
-    print(password_reset("jim@user.com","change","password"))
+    #print(password_reset("jim@user.com","change","password"))
 
