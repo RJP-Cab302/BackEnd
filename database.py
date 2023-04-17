@@ -323,12 +323,13 @@ def adjust_prices(year, day, new_base_fare):
     connection = connect(database=db_file)
     db = connection.cursor()
 
-    sql_instruction = f"UPDATE BookingData SET BaseFare = '{new_base_fare}' WHERE Year = '{year}', Day = '{day}';"
+    sql_instruction = f"UPDATE BookingData SET BaseFare = '{new_base_fare}' WHERE Year = '{year}' and Day == '{day}';"
     try:
         db.execute(sql_instruction)
         connection.commit()
         db.close()
         connection.close()
+        print("Price have been changed")
         return True
     except:
         print("The chosen date is not valid")
@@ -336,11 +337,13 @@ def adjust_prices(year, day, new_base_fare):
     
         
 if __name__ == "__main__":
-    print(add_user_to_database("jim@user.com","password"))
+    #print(add_user_to_database("jim@user.com","password"))
     #print(check_user_password_in_database("jim@user.com","password"))
     #print(delete_user_from_database("tim@user.com"))
     #create_booking_data(2023,120,50,99,30,400,5)
     #print(change_booking_data_sold_spaces(2023,113,50))
     #print(get_booking_data_sold_spaces(2023, 120))
-    print(password_reset("jim@user.com","change","password"))
+    #print(password_reset("jim@user.com","change","password"))
+    #create_booking_data('2023', '107', '45.20', '200', '0', '20.80', '55.35')
+    adjust_prices('2023', '107', '51.45')
 
