@@ -166,9 +166,6 @@ def password_reset(userName,new_password, old_password):
         return False
         
 
-
-
-
 def delete_user_from_database(user_name):
     """Deletes a user fron the database.
     @param user_name: string of the user to be deleted.
@@ -316,9 +313,29 @@ def get_booking_data_sold_spaces(year, day):
 
     return rows[0]
 
+def adjust_prices(year, day, new_base_fare):
+    global db_file
 
+    if not path.exists(db_file):
+        print("Database does not exist")
+        return False
+
+    connection = connect(database=db_file)
+    db = connection.cursor()
+
+    sql_instruction = f"UPDATE BookingData SET BaseFare = '{new_base_fare}' WHERE Year = '{year}', Day = '{day}';"
+    try:
+        db.execute(sql_instruction)
+        connection.commit()
+        db.close()
+        connection.close()
+        return True
+    except:
+        print("The chosen date is not valid")
+        return False
+    
+        
 if __name__ == "__main__":
-
     print(add_user_to_database("jim@user.com","password"))
     #print(check_user_password_in_database("jim@user.com","password"))
     #print(delete_user_from_database("tim@user.com"))
