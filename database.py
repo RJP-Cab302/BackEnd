@@ -313,8 +313,8 @@ def get_booking_data_sold_spaces(year, day):
 
     return rows[0]
 
-def adjust_prices(year, day, new_base_fare):
-    """Adjust the prise of a chosen date.
+def adjust_base_fare(year, day, new_base_fare):
+    """Adjust the base fare price of a chosen date.
     @param year: number of the year of the chosen date.
     @param day: number of the chosen date.
     @param new_base_fare: number of the new price of the chosen date.
@@ -365,7 +365,7 @@ if __name__ == "__main__":
     #print(check_user_password_in_database("jim@user.com","password"))
     #print(delete_user_from_database("tim@user.com"))
     create_booking_data(2023,120,50,99,30,400,5)
-    adjust_prices(2023, 120, 250)
+    adjust_base_fare(2023, 120, 150)
     #print(change_booking_data_sold_spaces(2023,113,50))
     #print(get_booking_data_sold_spaces(2023, 120))
     #print(password_reset("jim@user.com","change","password"))
