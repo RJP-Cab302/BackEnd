@@ -6,7 +6,7 @@ from flask import Flask, request, make_response
 from flask_cors import CORS, cross_origin
 from appauth import auth_required 
 from constraints import SECRET_KEY
-from database import add_user_to_database, check_user_password_in_database, delete_user_from_database, create_booking_data, get_booking_data_sold_spaces, update_user_address_to_database
+from database import add_user_to_database, check_user_password_in_database, delete_user_from_database, create_booking_data, get_booking_data_sold_spaces, update_user_address_to_database, update_profile
 from yield_management import Fare_Calculator
 from email_validator import validate_email, EmailNotValidError
 app = Flask(__name__)
@@ -107,6 +107,27 @@ def signup():
     else:
         return json.dumps({'ERROR': 'Error',
                     'message': 'Content is not supported'})
+    
+@app.route('/update_profile', methods=['POST'])
+@cross_origin()
+def Update_profile():
+     
+    if request.method == 'POST':
+        content_type = request.headers.get('Content-Type')
+
+    if(content_type == 'application/json'):
+        json_message = request.json  
+        if(update_profile(json_message["username"], json_message["password"], json_message["name"], json_message["useraddress"],)):
+            return  json.dumps({'name': 'test message',
+                       'message': 'The user\'s profile has been updated'})
+        else: 
+            return  json.dumps({'name': 'test message',
+                       'message': ' The user\'s profile has not been updated'})
+    else:
+        return json.dumps({'name': 'test message',
+                      'message': 'The provided details are not valid'})
+
+
 
 @app.route('/delete', methods=['DELETE'])
 @cross_origin()

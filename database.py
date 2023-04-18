@@ -151,7 +151,7 @@ def check_user_password_in_database(entered_user_name, entered_user_password):
     return False
 
 
-def update_profile(username, password, name, userType, userAddress):
+def update_profile(username, password, name, userAddress):
     global db_file
 
     if not path.exists(db_file):
@@ -161,7 +161,7 @@ def update_profile(username, password, name, userType, userAddress):
     connection = connect(database=db_file)
     db = connection.cursor()
 
-    sql_instruction = f"UPDATE Users SET Name = '{name}', UserType = '{userType}', UserAddress ='{userAddress}' WHERE UserName == '{username}'"
+    sql_instruction = f"UPDATE Users SET Name = '{name}', UserAddress ='{userAddress}' WHERE UserName == '{username}'"
     if(check_user_password_in_database(username,password)):
         db.execute(sql_instruction)
         connection.commit()
@@ -391,7 +391,7 @@ def adjust_base_fare(year, day, new_base_fare):
     
         
 if __name__ == "__main__":
-    #print(add_user_to_database("jim@user.com","password"))
+    print(add_user_to_database("jim@user.com","password"))
     #print(check_user_password_in_database("jim@user.com","password"))
     #print(delete_user_from_database("tim@user.com"))
     #create_booking_data(2023,120,50,99,30,400,5)
@@ -399,5 +399,5 @@ if __name__ == "__main__":
     #print(change_booking_data_sold_spaces(2023,113,50))
     #print(get_booking_data_sold_spaces(2023, 120))
     #print(password_reset("jim@user.com","change","password"))
-    print(update_profile('jim@user.com','password', 'Jim', 2, '22 brisbane'))
+    #print(update_profile('jim@user.com','password', 'Jim', 2, '22 brisbane'))
 
