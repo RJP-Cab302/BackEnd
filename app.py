@@ -74,7 +74,7 @@ def signup():
     if (content_type == 'application/json'):
         json_message = request.json        
 
-        if "username" not in json_message.keys() or "password" not in json_message.keys():
+        if "username" not in json_message.keys() or "password" not in json_message.keys() or "name" not in json_message.keys():
             response = app.response_class(json.dumps({"message":"Umm you haven't formatted the request correctly", "code":401}),
                     status=401,
                     mimetype='application/json')
@@ -88,7 +88,7 @@ def signup():
             return response   
 
         
-        if(add_user_to_database(json_message["username"], json_message["password"])):
+        if(add_user_to_database(json_message["username"], json_message["password"], json_message["name"])):
                 
             response = app.response_class(json.dumps({"message":"Sign up successful", "code":200}),
                                     status=200,

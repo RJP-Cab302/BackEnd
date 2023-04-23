@@ -175,7 +175,7 @@ def get_user_id_from_database(user_name):
         return False
 
 
-def add_user_to_database(user_name, user_password):
+def add_user_to_database(user_name, user_password, name):
     """Adds a user to the User table in the database. Will add only the user_name and user_password.
     @param user_name(string): The user name of the user, should be an email address.
     @param user_password(string): The password of the user. (The password will be hashed.)
@@ -190,7 +190,7 @@ def add_user_to_database(user_name, user_password):
     connection = connect(database=db_file)
     db = connection.cursor()
 
-    sql_instruction = f"INSERT INTO Users(UserName, UserPassword) VALUES ('{user_name}', '{user_password_hashed}');"
+    sql_instruction = f"INSERT INTO Users(UserName, UserPassword, Name) VALUES ('{user_name}', '{user_password_hashed}','{name}');"
     
     try:
         db.execute(sql_instruction)
