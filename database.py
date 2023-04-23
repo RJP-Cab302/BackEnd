@@ -151,7 +151,7 @@ def check_user_password_in_database(entered_user_name, entered_user_password):
     return False
 
 
-def update_profile(username, password, name, userAddress):
+def update_profile(username, name, userAddress):
     global db_file
 
     if not path.exists(db_file):
@@ -162,13 +162,13 @@ def update_profile(username, password, name, userAddress):
     db = connection.cursor()
 
     sql_instruction = f"UPDATE Users SET Name = '{name}', UserAddress ='{userAddress}' WHERE UserName == '{username}'"
-    if(check_user_password_in_database(username,password)):
+    try:
         db.execute(sql_instruction)
         connection.commit()
         db.close()
         connection.close() 
         return True
-    else:
+    except:
         return False
 
 
@@ -399,5 +399,5 @@ if __name__ == "__main__":
     #print(change_booking_data_sold_spaces(2023,113,50))
     #print(get_booking_data_sold_spaces(2023, 120))
     #print(password_reset("jim@user.com","change","password"))
-    #print(update_profile('jim@user.com','password', 'Jim', 2, '22 brisbane'))
+    print(update_profile('jim@user.com','Jim','22 brisbane'))
 
