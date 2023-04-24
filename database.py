@@ -24,13 +24,158 @@ def create_database(db_name):
     db.execute("CREATE TABLE Users(UserId INTEGER UNIQUE primary key AUTOINCREMENT, UserName TEXT UNIQUE, UserPassword TEXT(200), Name TEXT, UserType INTEGER, UserAddress TEXT UNIQUE);")
     db.execute("CREATE TABLE BookingData(Year INTEGER, Day INTEGER, BaseFare FLOAT, TotalSpaces INTEGER, SpacesSold INTEGER, MaxPrice FLOAT, MinPrice FLOAT, DaysForSale INTEGER, CONSTRAINT  PKYearDay Primary Key (Year, Day));")
     db.execute("CREATE TABLE BookingTable(BookingId INTEGER UNIQUE primary key AUTOINCREMENT,UserId INTEGER UNIQUE, vehicleRego TEXT, Year INTEGER, Day INTEGER, Price FLOAT)")
+    db.execute("CREATE TABLE VehicleTable(vehicleRego TEXT UNIQUE primary key, vehicleType TEXT, vehicleMake TEXT, vehicleModel TEXT, UserId INTEGER, FOREIGN KEY(UserId) REFERENCES Users(UserId));")
 
     connection.commit()
 
     db.close()
     connection.close()
 
-def add_user_to_database(user_name, user_password):
+def add_vehicle_to_database(vehicle_rego, user_id, vehicle_type = "", vehicle_make = "", vehicle_model = ""):
+    """Adds a vehicle to the Vehicle table in the database. Will add only the vehicle_rego, vehicle_type, vehicle_make, vehicle_model, user_id.
+    @param vehicle_rego(string): The registration of the vehicle.
+    @param vehicle_type(string): The type of the vehicle.
+    @param vehicle_make(string): The make of the vehicle.
+    @param vehicle_model(string): The model of the vehicle.
+    @param user_id(int): The user id of the user who owns the vehicle.
+    """
+    global db_file
+
+    if not path.exists(db_file):
+        create_database(db_file)
+
+    connection = connect(database=db_file)
+    db = connection.cursor()
+
+    sql_instruction = f"INSERT INTO VehicleTable(vehicleRego, vehicleType, vehicleMake, vehicleModel, UserId) VALUES ('{vehicle_rego}', '{vehicle_type}', '{vehicle_make}', '{vehicle_model}', '{user_id}');"
+
+    try:
+        db.execute(sql_instruction)
+        connection.commit()
+        db.close()
+        connection.close()
+        return True
+    except IntegrityError:
+        print("Vehicle already in database")
+        db.close()
+        connection.close()
+        return False
+    except:
+        print("Something else went wrong")
+        db.close()
+        connection.close()
+        return False
+
+def get_vehicles_from_database_by_user_id(user_id):
+    """Gets all the vehicles from the Vehicle table in the database. Will get only the vehicle_rego, vehicle_type, vehicle_make, vehicle_model, user_id.
+    @param user_id(int): The user id of the user who owns the vehicle.
+    @return: list of tuples containing the vehicle_rego, vehicle_type, vehicle_make, vehicle_model, user_id.
+    """
+    global db_file
+
+    if not path.exists(db_file):
+        create_database(db_file)
+
+    connection = connect(database=db_file)
+    db = connection.cursor()
+
+    sql_instruction = f"SELECT vehicleRego, vehicleType, vehicleMake, vehicleModel FROM VehicleTable WHERE UserId = '{user_id}';"
+
+    try:
+        db.execute(sql_instruction)
+        result = db.fetchall()
+        db.close()
+        connection.close()
+        return result
+    except:
+        print("Something went wrong")
+        db.close()
+        connection.close()
+        return False
+
+def get_vehicle_from_database_by_rego(vehicle_rego):
+    """Gets a vehicle from the Vehicle table in the database. Will get only the vehicle_rego, vehicle_type, vehicle_make, vehicle_model, user_id.
+    @param vehicle_rego(string): The registration of the vehicle.
+    @return: tuple containing the vehicle_rego, vehicle_type, vehicle_make, vehicle_model, user_id.
+    """
+    global db_file
+
+    if not path.exists(db_file):
+        create_database(db_file)
+
+    connection = connect(database=db_file)
+    db = connection.cursor()
+
+    sql_instruction = f"SELECT vehicleRego, vehicleType, vehicleMake, vehicleModel, UserId FROM VehicleTable WHERE vehicleRego = '{vehicle_rego}';"
+
+    try:
+        db.execute(sql_instruction)
+        result = db.fetchone()
+        db.close()
+        connection.close()
+        return result
+    except:
+        print("Something went wrong")
+        db.close()
+        connection.close()
+        return False
+
+def delete_vehicle_from_database(vehicle_rego, user_id):
+    """Deletes a vehicle from the Vehicle table in the database. Will delete only the vehicle_rego, vehicle_type, vehicle_make, vehicle_model, user_id.
+    @param vehicle_rego(string): The registration of the vehicle.
+    @return: True if successful, False if not.
+    """
+    global db_file
+
+    if not path.exists(db_file):
+        create_database(db_file)
+
+    connection = connect(database=db_file)
+    db = connection.cursor()
+
+    sql_instruction = f"DELETE FROM VehicleTable WHERE vehicleRego = '{vehicle_rego}' AND UserId = '{user_id}';"
+
+    try:
+        db.execute(sql_instruction)
+        connection.commit()
+        db.close()
+        connection.close()
+        return True
+    except:
+        print("Something went wrong")
+        db.close()
+        connection.close()
+        return False
+
+def get_user_id_from_database(user_name):
+    """Gets the user id from the User table in the database. Will get only the user_id.
+    @param user_name(string): The user name of the user, should be an email address.
+    @return: int containing the user_id.
+    """
+    global db_file
+
+    if not path.exists(db_file):
+        create_database(db_file)
+
+    connection = connect(database=db_file)
+    db = connection.cursor()
+
+    sql_instruction = f"SELECT UserId FROM Users WHERE UserName = '{user_name}';"
+
+    try:
+        db.execute(sql_instruction)
+        result = db.fetchone()
+        db.close()
+        connection.close()
+        return result[0]
+    except:
+        print("Something went wrong")
+        db.close()
+        connection.close()
+        return False
+
+
+def add_user_to_database(user_name, user_password, name):
     """Adds a user to the User table in the database. Will add only the user_name and user_password.
     @param user_name(string): The user name of the user, should be an email address.
     @param user_password(string): The password of the user. (The password will be hashed.)
@@ -45,7 +190,7 @@ def add_user_to_database(user_name, user_password):
     connection = connect(database=db_file)
     db = connection.cursor()
 
-    sql_instruction = f"INSERT INTO Users(UserName, UserPassword) VALUES ('{user_name}', '{user_password_hashed}');"
+    sql_instruction = f"INSERT INTO Users(UserName, UserPassword, Name) VALUES ('{user_name}', '{user_password_hashed}','{name}');"
     
     try:
         db.execute(sql_instruction)
@@ -391,7 +536,11 @@ def adjust_base_fare(year, day, new_base_fare):
     
         
 if __name__ == "__main__":
-    print(add_user_to_database("jim@user.com","password"))
+    #print(add_user_to_database("tom@user.com","password"))
+    #print(get_user_id_from_database("tom@user.com"))
+    #print(add_vehicle_to_database("ABC-123",1))
+    #print(get_vehicle_from_database_by_rego("ABC-123"))
+    print(delete_vehicle_from_database("CBA-321",1))
     #print(check_user_password_in_database("jim@user.com","password"))
     #print(delete_user_from_database("tim@user.com"))
     #create_booking_data(2023,120,50,99,30,400,5)
