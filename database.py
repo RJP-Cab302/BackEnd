@@ -295,6 +295,28 @@ def check_user_password_in_database(entered_user_name, entered_user_password):
     print("Password does not match")
     return False
 
+
+def update_profile(username, name, userAddress):
+    global db_file
+
+    if not path.exists(db_file):
+        print("Database does not exist")
+        return False
+
+    connection = connect(database=db_file)
+    db = connection.cursor()
+
+    sql_instruction = f"UPDATE Users SET Name = '{name}', UserAddress ='{userAddress}' WHERE UserName == '{username}'"
+    try:
+        db.execute(sql_instruction)
+        connection.commit()
+        db.close()
+        connection.close() 
+        return True
+    except:
+        return False
+
+
 def password_reset(userName,new_password, old_password):
     global db_file
 
@@ -526,4 +548,5 @@ if __name__ == "__main__":
     #print(change_booking_data_sold_spaces(2023,113,50))
     #print(get_booking_data_sold_spaces(2023, 120))
     #print(password_reset("jim@user.com","change","password"))
+    print(update_profile('jim@user.com','Jim','22 brisbane'))
 
