@@ -174,6 +174,33 @@ def get_user_id_from_database(user_name):
         connection.close()
         return False
 
+def get_name_from_database(user_name):
+    """Gets the name from the User table in the database. Will get only the name.
+    @param user_name(string): The user name of the user, should be an email address.
+    @return: string containing the name.
+    """
+    global db_file
+
+    if not path.exists(db_file):
+        print("No database found")
+        return False
+
+    connection = connect(database=db_file)
+    db = connection.cursor()
+
+    sql_instruction = f"SELECT Name FROM Users WHERE UserName = '{user_name}';"
+
+    try:
+        db.execute(sql_instruction)
+        result = db.fetchone()
+        db.close()
+        connection.close()
+        return result[0]
+    except:
+        print("Something went wrong")
+        db.close()
+        connection.close()
+        return False
 
 def add_user_to_database(user_name, user_password, name):
     """Adds a user to the User table in the database. Will add only the user_name and user_password.
@@ -536,11 +563,11 @@ def adjust_base_fare(year, day, new_base_fare):
     
         
 if __name__ == "__main__":
-    #print(add_user_to_database("tom@user.com","password"))
+    print(add_user_to_database("bob@user.com","password", "Bob"))
     #print(get_user_id_from_database("tom@user.com"))
     #print(add_vehicle_to_database("ABC-123",1))
     #print(get_vehicle_from_database_by_rego("ABC-123"))
-    print(delete_vehicle_from_database("CBA-321",1))
+    #print(delete_vehicle_from_database("CBA-321",1))
     #print(check_user_password_in_database("jim@user.com","password"))
     #print(delete_user_from_database("tim@user.com"))
     #create_booking_data(2023,120,50,99,30,400,5)
@@ -548,5 +575,6 @@ if __name__ == "__main__":
     #print(change_booking_data_sold_spaces(2023,113,50))
     #print(get_booking_data_sold_spaces(2023, 120))
     #print(password_reset("jim@user.com","change","password"))
-    print(update_profile('jim@user.com','Jim','22 brisbane'))
+    #print(update_profile('jim@user.com','Jim','22 brisbane'))
+    print(get_name_from_database("bob@user.com"))
 
