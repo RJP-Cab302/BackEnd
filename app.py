@@ -6,7 +6,7 @@ from flask import Flask, request, make_response
 from flask_cors import CORS, cross_origin
 from appauth import auth_required 
 from constraints import SECRET_KEY
-from database import add_user_to_database, check_user_password_in_database, delete_user_from_database, create_booking_data, get_booking_data_sold_spaces, update_user_address_to_database, add_vehicle_to_database, delete_vehicle_from_database, get_user_id_from_database, update_profile
+from database import add_user_to_database, check_user_password_in_database, delete_user_from_database, create_booking_data, get_booking_data_sold_spaces, update_user_address_to_database, add_vehicle_to_database, delete_vehicle_from_database, get_user_id_from_database, update_profile, get_name_from_database
 from yield_management import Fare_Calculator
 from email_validator import validate_email, EmailNotValidError
 app = Flask(__name__)
@@ -62,7 +62,8 @@ def login():
         return json.dumps({"message" : "Username or password invalid"})
     
     token = jwt.encode({'user': auth.username, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=5)},SECRET_KEY,algorithm="HS256")
-    return json.dumps({'token': token})
+    name = get_name_from_database(auth.username)
+    return json.dumps({'token': token, 'name': name})
 
 @app.route('/signup', methods=['POST'])
 @cross_origin()
