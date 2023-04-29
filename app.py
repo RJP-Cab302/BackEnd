@@ -6,7 +6,10 @@ from flask import Flask, request, make_response
 from flask_cors import CORS, cross_origin
 from appauth import auth_required 
 from constraints import SECRET_KEY
-from database import add_user_to_database, check_user_password_in_database, delete_user_from_database, create_booking_data, get_booking_data_sold_spaces, update_user_address_to_database, add_vehicle_to_database, delete_vehicle_from_database, get_user_id_from_database, update_profile, get_name_from_database
+from database import add_user_to_database, check_user_password_in_database, delete_user_from_database 
+from database import create_booking_data, get_booking_data_sold_spaces, update_user_address_to_database 
+from database import add_vehicle_to_database, delete_vehicle_from_database, get_user_id_from_database 
+from database import update_profile, get_name_from_database, get_vehicles_from_database_by_user_id
 from yield_management import Fare_Calculator
 from email_validator import validate_email, EmailNotValidError
 app = Flask(__name__)
@@ -61,7 +64,7 @@ def login():
     if not check_user_password_in_database(auth.username, auth.password):
         return json.dumps({"message" : "Username or password invalid"})
     
-    token = jwt.encode({'user': auth.username, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=5)},SECRET_KEY,algorithm="HS256")
+    token = jwt.encode({'user': auth.username, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=30)},SECRET_KEY,algorithm="HS256")
     name = get_name_from_database(auth.username)
     return json.dumps({'token': token, 'name': name})
 
@@ -319,11 +322,30 @@ def add_vehicle_endpoint():
                             status=401,
                             mimetype='application/json')
         return response
+    
+    if "vehicle_type" not in json_message.keys():
+        response = app.response_class(json.dumps({"message":"You did it wrong, needs vehicle_type field", "code":401}),
+                            status=401,
+                            mimetype='application/json')
+        return response
+    
+    if "vehicle_make" not in json_message.keys():
+        response = app.response_class(json.dumps({"message":"You did it wrong, needs vehicle_make field", "code":401}),
+                            status=401,
+                            mimetype='application/json')
+        return response
+
+    if "vehicle_model" not in json_message.keys():
+        response = app.response_class(json.dumps({"message":"You did it wrong, needs vehicle_model field", "code":401}),
+                            status=401,
+                            mimetype='application/json')
+        return response
+    
 
     try:
         user_name = jwt.decode(json_message['token'], SECRET_KEY, algorithms="HS256")["user"]
         user_id = get_user_id_from_database(user_name)
-        if add_vehicle_to_database(json_message['vehicle_rego'], user_id):
+        if add_vehicle_to_database(json_message['vehicle_rego'], user_id, json_message['vehicle_type'], json_message['vehicle_make'], json_message['vehicle_model']):
             response = app.response_class(json.dumps({"message":"Vehicle added", "code":200}),
                                     status=200,
                                     mimetype='application/json')
@@ -374,6 +396,36 @@ def delete_vehicle_endpoint():
     except:
         print("big boo boo")
         response = app.response_class(json.dumps({"message":"Sorry something went wrong trying to delete the vehicle from the database", "code":401}),
+                    status=401,
+                    mimetype='application/json')
+
+    return response
+
+@app.route('/user_get_vehicles', methods=['POST'])
+@cross_origin()
+@auth_required
+def user_get_vehicle_endpoint():
+    if request.method == 'POST':
+        content_type = request.headers.get('Content-Type')
+
+    if (content_type == 'application/json'):
+        json_message = request.json
+    else:
+        response = app.response_class(json.dumps({"message":"You did it wrong, needs JSON", "code":401}),
+                                    status=401,
+                                    mimetype='application/json')
+        return response
+
+    try:
+        user_name = jwt.decode(json_message['token'], SECRET_KEY, algorithms="HS256")["user"]
+        user_id = get_user_id_from_database(user_name)
+        vehicles = get_vehicles_from_database_by_user_id(user_id)
+        response = app.response_class(json.dumps({"message":"Vehicles retrieved", "vehicles":vehicles, "code":200}),
+                                status=200,
+                                mimetype='application/json')
+    except:
+        print("big boo boo")
+        response = app.response_class(json.dumps({"message":"Sorry something went wrong trying to retrieve the vehicles from the database", "code":401}),
                     status=401,
                     mimetype='application/json')
 

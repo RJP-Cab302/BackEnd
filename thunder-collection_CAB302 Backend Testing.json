@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "CAB302 Backend Testing",
-    "dateExported": "2023-04-21T00:26:41.011Z",
+    "dateExported": "2023-04-29T00:22:38.523Z",
     "version": "1.1",
     "folders": [],
     "requests": [
@@ -14,7 +14,7 @@
             "method": "POST",
             "sortNum": 10000,
             "created": "2023-04-17T00:10:32.569Z",
-            "modified": "2023-04-21T00:03:02.444Z",
+            "modified": "2023-04-29T00:14:52.591Z",
             "headers": [
                 {
                     "name": "User-Agent",
@@ -25,7 +25,7 @@
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\"username\":\"jom@user.com\",\n  \"password\":\"Super\"\n}",
+                "raw": "{\"username\":\"jomba@user.com\",\n  \"password\":\"Test\",\n  \"name\" : \"Jommbalya\"\n}",
                 "form": []
             },
             "tests": []
@@ -39,14 +39,14 @@
             "method": "GET",
             "sortNum": 20000,
             "created": "2023-04-17T00:11:54.939Z",
-            "modified": "2023-04-21T00:03:22.943Z",
+            "modified": "2023-04-29T00:15:02.303Z",
             "headers": [],
             "params": [],
             "auth": {
                 "type": "basic",
                 "basic": {
-                    "username": "jom@user.com",
-                    "password": "Super"
+                    "username": "jomba@user.com",
+                    "password": "Test"
                 }
             },
             "tests": []
@@ -186,12 +186,12 @@
             "method": "POST",
             "sortNum": 80000,
             "created": "2023-04-20T23:23:20.754Z",
-            "modified": "2023-04-20T23:23:20.754Z",
+            "modified": "2023-04-28T23:44:16.666Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"username\":\"tom@user.com\",\n  \"password\":\"Super\",\n  \"name\":\"James\",\n  \"useraddress\":\"123 house st\"\n}",
+                "raw": "{\n  \"name\":\"James\",\n  \"useraddress\":\"200 house st\",\n  \"token\" : \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiam9tYmFAdXNlci5jb20iLCJleHAiOjE2ODI3MjU2MzB9.Cv1jaOdB02d1hcDi7KtbEJMoEpsoqqjnqIAWF_mKauA\"\n}",
                 "form": []
             },
             "tests": []
@@ -205,7 +205,7 @@
             "method": "POST",
             "sortNum": 90000,
             "created": "2023-04-21T00:22:34.464Z",
-            "modified": "2023-04-21T00:24:17.028Z",
+            "modified": "2023-04-29T00:20:25.296Z",
             "headers": [
                 {
                     "name": "User-Agent",
@@ -216,7 +216,7 @@
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"vehicle_rego\":\"DDD-322\",\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiam9tQHVzZXIuY29tIiwiZXhwIjoxNjgyMDM2OTI3fQ.2VDM9GkbJpPGAzutIPClSYSDXaxAwEyx_wKtoRauBC4\"\n}",
+                "raw": "{\n  \"vehicle_rego\":\"AAA-322\",\n  \"vehicle_type\":\"Car\",\n  \"vehicle_model\":\"Toyota\",\n  \"vehicle_make\":\"Corolla\",\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiam9tYmFAdXNlci5jb20iLCJleHAiOjE2ODI3Mjc5MTR9.Zbe3bwWNu2G2IUEm6XuDAXCQ1lo9fkt1pkHHMqO3P7g\"\n}",
                 "form": []
             },
             "tests": []
@@ -236,6 +236,25 @@
             "body": {
                 "type": "json",
                 "raw": "{\n  \"vehicle_rego\":\"DDD-322\",\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiam9tQHVzZXIuY29tIiwiZXhwIjoxNjgyMDM2OTI3fQ.2VDM9GkbJpPGAzutIPClSYSDXaxAwEyx_wKtoRauBC4\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "98a55f22-c4a5-4223-9b8a-1de48a2bab69",
+            "colId": "cce5e882-d069-4d27-b9e7-0789031e2d63",
+            "containerId": "",
+            "name": "user_get_vehicles",
+            "url": "localhost:8080/user_get_vehicles",
+            "method": "POST",
+            "sortNum": 110000,
+            "created": "2023-04-29T00:21:54.953Z",
+            "modified": "2023-04-29T00:21:54.953Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiam9tYmFAdXNlci5jb20iLCJleHAiOjE2ODI3Mjc5MTR9.Zbe3bwWNu2G2IUEm6XuDAXCQ1lo9fkt1pkHHMqO3P7g\"\n  \n}",
                 "form": []
             },
             "tests": []
