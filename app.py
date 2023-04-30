@@ -120,21 +120,31 @@ def Update_profile():
     if(content_type == 'application/json'):
         json_message = request.json  
 
+        if "username" not in json_message.keys(): #no need for this if statment becuase user has to be signed in. 
+            response = app.response_class(json.dumps({"message":"Umm you haven't entered your username", "code":401}),
+                    status=401,
+                    mimetype='application/json')
+            return response
+
         if "name" not in json_message.keys():
             response = app.response_class(json.dumps({"message":"Umm you haven't entered your name", "code":401}),
                     status=401,
                     mimetype='application/json')
             return response
 
-        if "useraddress" not in json_message.keys():
+        if "username" not in json_message.keys() or "password" not in json_message.keys():
             response = app.response_class(json.dumps({"message":"Umm you haven't entered your address", "code":401}),
                     status=401,
                     mimetype='application/json')
             return response
+            
+        if not check_email(json_message["username"]):
+            response = app.response_class(json.dumps({"message":"Umm you haven't entered a valid email address", "code":422}),
+                    status=422,
+                    mimetype='application/json')
+            return response  
         
-        user_name = jwt.decode(json_message['token'], SECRET_KEY, algorithms="HS256")["user"]
-        
-        if(update_profile(user_name, json_message["name"], json_message["useraddress"],)):
+        if(update_profile(json_message["username"], json_message["name"], json_message["useraddress"],)):
             return  json.dumps({'name': 'test message',
                        'message': 'The user\'s profile has been updated'})
         else: 
