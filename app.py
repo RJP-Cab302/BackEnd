@@ -9,7 +9,7 @@ from constraints import SECRET_KEY
 from database import add_user_to_database, check_user_password_in_database, delete_user_from_database 
 from database import create_booking_data, get_booking_data_sold_spaces, update_user_address_to_database 
 from database import add_vehicle_to_database, delete_vehicle_from_database, get_user_id_from_database 
-from database import update_profile, get_name_from_database, get_vehicles_from_database_by_user_id
+from database import update_profile, get_name_from_database, get_vehicles_from_database_by_user_id, get_address_from_database
 from yield_management import Fare_Calculator
 from email_validator import validate_email, EmailNotValidError
 app = Flask(__name__)
@@ -112,10 +112,18 @@ def signup():
         return json.dumps({'ERROR': 'Error',
                     'message': 'Content is not supported'})
     
-@app.route('/update_profile', methods=['POST'])
+@app.route('/update_profile', methods=['GET','POST'])
 @cross_origin()
 @auth_required
 def Update_profile():
+
+    if request.method == 'GET':
+        json_message = request.json
+        user_name1 = jwt.decode(json_message['token'], SECRET_KEY, algorithms="HS256")["user"]
+        userName = get_name_from_database(user_name1)
+        user_address= get_address_from_database(user_name1)
+        return json.dumps({'name': userName,
+                       'address': user_address})
      
     if request.method == 'POST':
         content_type = request.headers.get('Content-Type')

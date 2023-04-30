@@ -1,20 +1,20 @@
 {
     "client": "Thunder Client",
     "collectionName": "CAB302 Backend Testing",
-    "dateExported": "2023-04-29T00:22:38.523Z",
+    "dateExported": "2023-04-30T12:44:50.801Z",
     "version": "1.1",
     "folders": [],
     "requests": [
         {
-            "_id": "54d98327-547c-45a0-aa95-ee4e9feafb35",
-            "colId": "cce5e882-d069-4d27-b9e7-0789031e2d63",
+            "_id": "c51808f0-7666-45d7-b57d-4fbd3c54d123",
+            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
             "containerId": "",
             "name": "Sign Up",
             "url": "localhost:8080/signup",
             "method": "POST",
             "sortNum": 10000,
-            "created": "2023-04-17T00:10:32.569Z",
-            "modified": "2023-04-29T00:14:52.591Z",
+            "created": "2023-04-30T04:58:11.821Z",
+            "modified": "2023-04-30T04:58:11.821Z",
             "headers": [
                 {
                     "name": "User-Agent",
@@ -31,15 +31,15 @@
             "tests": []
         },
         {
-            "_id": "03e1fcf7-1aac-405a-8b5b-1604c7d5e9df",
-            "colId": "cce5e882-d069-4d27-b9e7-0789031e2d63",
+            "_id": "00491de0-ef3f-4a27-8cc3-e12b1f5aa508",
+            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
             "containerId": "",
             "name": "Login",
             "url": "localhost:8080/login",
             "method": "GET",
             "sortNum": 20000,
-            "created": "2023-04-17T00:11:54.939Z",
-            "modified": "2023-04-29T00:15:02.303Z",
+            "created": "2023-04-30T04:58:11.822Z",
+            "modified": "2023-04-30T04:58:11.822Z",
             "headers": [],
             "params": [],
             "auth": {
@@ -52,15 +52,15 @@
             "tests": []
         },
         {
-            "_id": "5c6d9722-f0f1-43cb-979e-496856283df2",
-            "colId": "cce5e882-d069-4d27-b9e7-0789031e2d63",
+            "_id": "4ff4f316-d0f0-4ecd-bd56-3ccf3978e6a5",
+            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
             "containerId": "",
             "name": "Protected Example",
             "url": "localhost:8080/protected",
-            "method": "POST",
+            "method": "GET",
             "sortNum": 30000,
-            "created": "2023-04-17T00:12:52.436Z",
-            "modified": "2023-04-17T02:09:40.674Z",
+            "created": "2023-04-30T04:58:11.823Z",
+            "modified": "2023-04-30T12:40:07.000Z",
             "headers": [
                 {
                     "name": "User-Agent",
@@ -71,21 +71,21 @@
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\"message\":\"My message\",\n\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidG9tQHRlc3QuY29tIiwiZXhwIjoxNjgxNjk3NjQ4fQ.EWzrJ7ZpGzLKL0KpSbWMnUTv83YiCGK-1nWK13imD9I\"\n}",
+                "raw": "{\"message\":\"My message\",\n\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiam9tYmFAdXNlci5jb20iLCJleHAiOjE2ODI4NTk5NjJ9.zdAqEMrF6Xz72tJrHu0DIBe_ScDMeckuhUwpUkt5FuY\"\n}",
                 "form": []
             },
             "tests": []
         },
         {
-            "_id": "6caaf93b-4f6a-46e2-ace4-0b850c847816",
-            "colId": "cce5e882-d069-4d27-b9e7-0789031e2d63",
+            "_id": "83430e06-8c65-4a24-a840-7f9b2ab391ac",
+            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
             "containerId": "",
             "name": "Create Booking Data",
             "url": "localhost:8080/create_booking_data",
             "method": "POST",
             "sortNum": 40000,
-            "created": "2023-04-17T00:13:30.001Z",
-            "modified": "2023-04-17T02:09:58.740Z",
+            "created": "2023-04-30T04:58:11.824Z",
+            "modified": "2023-04-30T04:58:11.824Z",
             "headers": [
                 {
                     "name": "User-Agent",
@@ -102,15 +102,15 @@
             "tests": []
         },
         {
-            "_id": "3b437d04-fb26-4ae9-b577-f361aba2c97b",
-            "colId": "cce5e882-d069-4d27-b9e7-0789031e2d63",
+            "_id": "ecd0759c-f128-49cf-8cd2-eebc994d382c",
+            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
             "containerId": "",
             "name": "Get Price",
             "url": "localhost:8080/get_day_price",
             "method": "POST",
             "sortNum": 50000,
-            "created": "2023-04-17T00:13:59.701Z",
-            "modified": "2023-04-17T02:10:56.980Z",
+            "created": "2023-04-30T04:58:11.825Z",
+            "modified": "2023-04-30T04:58:11.825Z",
             "headers": [
                 {
                     "name": "User-Agent",
@@ -127,15 +127,15 @@
             "tests": []
         },
         {
-            "_id": "d0a7ed18-b6e8-4553-a799-fbf2fa089867",
-            "colId": "cce5e882-d069-4d27-b9e7-0789031e2d63",
+            "_id": "0779c23d-b4ee-421b-94c7-28f3e80617cd",
+            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
             "containerId": "",
             "name": "Basic Get Test",
             "url": "localhost:8080",
             "method": "GET",
             "sortNum": 60000,
-            "created": "2023-04-17T00:23:32.905Z",
-            "modified": "2023-04-17T00:23:32.905Z",
+            "created": "2023-04-30T04:58:11.826Z",
+            "modified": "2023-04-30T04:58:11.826Z",
             "headers": [
                 {
                     "name": "User-Agent",
@@ -152,15 +152,15 @@
             "tests": []
         },
         {
-            "_id": "6863d0a1-72fd-4826-8a1e-b362e7b9142c",
-            "colId": "cce5e882-d069-4d27-b9e7-0789031e2d63",
+            "_id": "d7f22958-92fb-4dcf-8b42-7dcdd889ba34",
+            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
             "containerId": "",
             "name": "Delete user",
             "url": "localhost:8080/delete",
             "method": "DELETE",
             "sortNum": 70000,
-            "created": "2023-04-17T02:05:52.795Z",
-            "modified": "2023-04-17T02:05:52.795Z",
+            "created": "2023-04-30T04:58:11.827Z",
+            "modified": "2023-04-30T04:58:11.827Z",
             "headers": [],
             "params": [],
             "body": {
@@ -178,15 +178,15 @@
             "tests": []
         },
         {
-            "_id": "e10b8305-07ba-4eac-b908-47eed21385a1",
-            "colId": "cce5e882-d069-4d27-b9e7-0789031e2d63",
+            "_id": "5a5b7b6a-0ef3-497a-81a8-a01db6588f81",
+            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
             "containerId": "",
             "name": "Update User",
             "url": "localhost:8080/update_profile",
             "method": "POST",
             "sortNum": 80000,
-            "created": "2023-04-20T23:23:20.754Z",
-            "modified": "2023-04-28T23:44:16.666Z",
+            "created": "2023-04-30T04:58:11.828Z",
+            "modified": "2023-04-30T04:58:11.828Z",
             "headers": [],
             "params": [],
             "body": {
@@ -197,15 +197,15 @@
             "tests": []
         },
         {
-            "_id": "a9cc650c-f91f-440f-bf9c-66e7bca0592f",
-            "colId": "cce5e882-d069-4d27-b9e7-0789031e2d63",
+            "_id": "afe1e0e9-91aa-4124-b934-939feab7eb61",
+            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
             "containerId": "",
             "name": "add_vehicle",
             "url": "localhost:8080/add_vehicle",
             "method": "POST",
             "sortNum": 90000,
-            "created": "2023-04-21T00:22:34.464Z",
-            "modified": "2023-04-29T00:20:25.296Z",
+            "created": "2023-04-30T04:58:11.829Z",
+            "modified": "2023-04-30T04:59:40.405Z",
             "headers": [
                 {
                     "name": "User-Agent",
@@ -216,21 +216,21 @@
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"vehicle_rego\":\"AAA-322\",\n  \"vehicle_type\":\"Car\",\n  \"vehicle_model\":\"Toyota\",\n  \"vehicle_make\":\"Corolla\",\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiam9tYmFAdXNlci5jb20iLCJleHAiOjE2ODI3Mjc5MTR9.Zbe3bwWNu2G2IUEm6XuDAXCQ1lo9fkt1pkHHMqO3P7g\"\n}",
+                "raw": "{\n  \"vehicle_rego\":\"AAA-322\",\n  \"vehicle_type\":\"Car\",\n  \"vehicle_model\":\"Toyota\",\n  \"vehicle_make\":\"Corolla\",\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiam9tYmFAdXNlci5jb20iLCJleHAiOjE2ODI4MzI1NDN9.W_leNU9OvyDxNzLzs3_SgNpsiXfS2jIkhDs6786dNok\"\n}",
                 "form": []
             },
             "tests": []
         },
         {
-            "_id": "2fefc418-66cd-4a62-a07e-b98dd387dcc9",
-            "colId": "cce5e882-d069-4d27-b9e7-0789031e2d63",
+            "_id": "de7d1d2f-dfc0-4931-9f26-5ba6c7c0d96f",
+            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
             "containerId": "",
             "name": "delete_vehicle",
             "url": "localhost:8080/delete_vehicle",
             "method": "DELETE",
             "sortNum": 100000,
-            "created": "2023-04-21T00:25:01.833Z",
-            "modified": "2023-04-21T00:26:24.631Z",
+            "created": "2023-04-30T04:58:11.830Z",
+            "modified": "2023-04-30T04:58:11.830Z",
             "headers": [],
             "params": [],
             "body": {
@@ -241,20 +241,58 @@
             "tests": []
         },
         {
-            "_id": "98a55f22-c4a5-4223-9b8a-1de48a2bab69",
-            "colId": "cce5e882-d069-4d27-b9e7-0789031e2d63",
+            "_id": "4dbac935-1c3d-43b3-889a-2b2028fdebd4",
+            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
             "containerId": "",
             "name": "user_get_vehicles",
             "url": "localhost:8080/user_get_vehicles",
             "method": "POST",
             "sortNum": 110000,
-            "created": "2023-04-29T00:21:54.953Z",
-            "modified": "2023-04-29T00:21:54.953Z",
+            "created": "2023-04-30T04:58:11.831Z",
+            "modified": "2023-04-30T04:58:11.831Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
                 "raw": "{\n  \"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiam9tYmFAdXNlci5jb20iLCJleHAiOjE2ODI3Mjc5MTR9.Zbe3bwWNu2G2IUEm6XuDAXCQ1lo9fkt1pkHHMqO3P7g\"\n  \n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "ac66d97b-d641-420c-8abe-714353807a94",
+            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
+            "containerId": "",
+            "name": "make a booking",
+            "url": "http://127.0.0.1:8080/booking",
+            "method": "POST",
+            "sortNum": 120000,
+            "created": "2023-04-30T09:48:36.638Z",
+            "modified": "2023-04-30T11:23:17.511Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n \"vehicle_rego\" : \"TGZ582\",\n \"year\" : 2023,\n \"day\" :113,\n \"price\": 50,\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiam9tYmFAdXNlci5jb20iLCJleHAiOjE2ODI4NTUzMTZ9.xUZtYybl2PMSucSjKeI_VNI8QWU0SWyaUaosD3noBV0\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "0310bc91-1f54-4e12-8c55-ff762a56aa2c",
+            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
+            "containerId": "",
+            "name": "update profile get",
+            "url": "http://127.0.0.1:8080/update_profile",
+            "method": "GET",
+            "sortNum": 130000,
+            "created": "2023-04-30T12:44:22.213Z",
+            "modified": "2023-04-30T12:44:40.996Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiam9tYmFAdXNlci5jb20iLCJleHAiOjE2ODI4NTk5NjJ9.zdAqEMrF6Xz72tJrHu0DIBe_ScDMeckuhUwpUkt5FuY\"\n}",
                 "form": []
             },
             "tests": []
