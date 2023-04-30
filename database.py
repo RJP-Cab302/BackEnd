@@ -23,7 +23,7 @@ def create_database(db_name):
 
     db.execute("CREATE TABLE Users(UserId INTEGER UNIQUE primary key AUTOINCREMENT, UserName TEXT UNIQUE, UserPassword TEXT(200), Name TEXT, UserType INTEGER, UserAddress TEXT UNIQUE);")
     db.execute("CREATE TABLE BookingData(Year INTEGER, Day INTEGER, BaseFare FLOAT, TotalSpaces INTEGER, SpacesSold INTEGER, MaxPrice FLOAT, MinPrice FLOAT, DaysForSale INTEGER, CONSTRAINT  PKYearDay Primary Key (Year, Day));")
-    db.execute("CREATE TABLE BookingTable(BookingId INTEGER UNIQUE primary key AUTOINCREMENT,UserId INTEGER UNIQUE, vehicleRego TEXT, Year INTEGER, Day INTEGER, Price FLOAT)")
+    db.execute("CREATE TABLE BookingTable(BookingId INTEGER UNIQUE primary key AUTOINCREMENT, UserId INTEGER, vehicleRego TEXT, Year INTEGER, Day INTEGER, Price FLOAT)")
     db.execute("CREATE TABLE VehicleTable(vehicleRego TEXT UNIQUE primary key, vehicleType TEXT, vehicleMake TEXT, vehicleModel TEXT, UserId INTEGER, FOREIGN KEY(UserId) REFERENCES Users(UserId));")
 
     connection.commit()
@@ -426,7 +426,7 @@ def create_booking_data(year, day, base_fare, total_spaces, days_for_sale, max_p
         print("adding")
         connection = connect(database=db_file, timeout=5)
         db = connection.cursor()
-        sql_instruction = f"INSERT INTO BookingData(Year, Day, BaseFare, TotalSpaces, DaysForSale, MaxPrice, MinPrice) VALUES ({year}, {day},{base_fare}, {total_spaces},{days_for_sale}, {max_price}, {min_price});"
+        sql_instruction = f"INSERT INTO BookingData(Year, Day, BaseFare, TotalSpaces, SpacesSold, DaysForSale, MaxPrice, MinPrice) VALUES ({year}, {day},{base_fare}, {total_spaces}, {0} ,{days_for_sale}, {max_price}, {min_price});"
 
         db.execute(sql_instruction)
         connection.commit()
@@ -434,6 +434,63 @@ def create_booking_data(year, day, base_fare, total_spaces, days_for_sale, max_p
         connection.close()
         return True
     return False
+
+def parking_booking(userID, rego, year, day, price):
+    global db_file
+
+    if not path.exists(db_file):
+        print("Database does not exist")
+        return False
+    
+    connection = connect(database=db_file)
+    db = connection.cursor() 
+    sql_instruction = f"INSERT INTO BookingTable(UserId, vehicleRego, Year, Day, Price) VALUES ('{userID}', '{rego}', '{year}', '{day}', '{price}');"
+    Year, Day, BaseFare, TotalSpaces, SpacesSold, DaysForSale, MaxPrice, MinPrice = (get_booking_data_sold_spaces(year, day))
+
+    
+
+    try:       
+        db.execute(sql_instruction)
+        connection.commit()
+        db.close()
+        change_booking_data_sold_spaces(year, day, SpacesSold + 1)            
+        print("Booking has been made")
+        return True
+    except IntegrityError: 
+        print("Booking already in database")
+        db.close()
+        connection.close()
+        return False
+    except:
+        print("something went wrong")
+        return False
+
+
+
+def get_booking_number(userID, rego, year, day, price):
+
+    global db_file
+
+    if not path.exists(db_file):
+        print("Database does not exist")
+        return False
+
+    connection = connect(database=db_file)
+    db = connection.cursor()
+
+    sql_instruction =  f"SELECT BookingId FROM BookingTable WHERE UserId == '{userID}' and vehicleRego == '{rego}' and Year == '{year}' and Day == '{day}' and Price == '{price}'"
+    
+    try:                
+        db.execute(sql_instruction)
+        row = db.fetchall()
+        connection.commit()
+        db.close()
+        return row[0][0]
+    except:
+        print("something went wrong")
+        return False
+
+
 
 def change_booking_data_sold_spaces(year, day, space_sold):
     """change_booking_data_sold_spaces _summary_
@@ -465,7 +522,7 @@ def change_booking_data_sold_spaces(year, day, space_sold):
     db.close()
     connection.close()
 
-    print(rows[0][2])
+    #print(rows[0][2]) #do we need this?
 
     if len(rows) == 1:
         if rows[0][2] < space_sold:
@@ -512,7 +569,6 @@ def get_booking_data_sold_spaces(year, day):
 
     db.close()
     connection.close()
-
     return rows[0]
 
 def adjust_base_fare(year, day, new_base_fare):
@@ -565,17 +621,24 @@ def adjust_base_fare(year, day, new_base_fare):
 if __name__ == "__main__":
     #print(add_user_to_database("bob@user.com","password", "Bob"))
     #print(get_user_id_from_database("tom@user.com"))
-    print(add_vehicle_to_database("CBA-123",1))
+    #print(add_vehicle_to_database("CBA-123",1))
     #print(get_vehicle_from_database_by_rego("ABC-123"))
-    print(get_vehicles_from_database_by_user_id(1))
+    #print(get_vehicles_from_database_by_user_id(1))
     #print(delete_vehicle_from_database("CBA-321",1))
     #print(check_user_password_in_database("jim@user.com","password"))
     #print(delete_user_from_database("tim@user.com"))
-    #create_booking_data(2023,120,50,99,30,400,5)
+    print(create_booking_data(2023,120,50,99,30,400,5))
     #adjust_base_fare(2023, 120, 150)
-    #print(change_booking_data_sold_spaces(2023,113,50))
+    print()
+    #print(change_booking_data_sold_spaces(2023,120,50))
+    print()
     #print(get_booking_data_sold_spaces(2023, 120))
     #print(password_reset("jim@user.com","change","password"))
     #print(update_profile('jim@user.com','Jim','22 brisbane'))
     #print(get_name_from_database("bob@user.com"))
+    print() 
+    print(parking_booking(1, "rego4", "2023", "181", "5"))
+    #print(parking_booking(2, "test2", "2023", "180", "50"))
+    #print(parking_booking(3, "rego3", "2023", "180", "50"))
+    #print(get_booking_number(1, "rego", "2023", "444", "50"))
 
