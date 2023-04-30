@@ -1,7 +1,8 @@
 {
     "client": "Thunder Client",
     "collectionName": "CAB302 Backend Testing",
-    "dateExported": "2023-04-30T11:18:06.928Z",
+
+    "dateExported": "2023-04-30T12:44:50.801Z",
     "version": "1.1",
     "folders": [],
     "requests": [
@@ -57,10 +58,10 @@
             "containerId": "",
             "name": "Protected Example",
             "url": "localhost:8080/protected",
-            "method": "POST",
+            "method": "GET",
             "sortNum": 30000,
             "created": "2023-04-30T04:58:11.823Z",
-            "modified": "2023-04-30T04:58:11.823Z",
+            "modified": "2023-04-30T12:40:07.000Z",
             "headers": [
                 {
                     "name": "User-Agent",
@@ -71,7 +72,7 @@
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\"message\":\"My message\",\n\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidG9tQHRlc3QuY29tIiwiZXhwIjoxNjgxNjk3NjQ4fQ.EWzrJ7ZpGzLKL0KpSbWMnUTv83YiCGK-1nWK13imD9I\"\n}",
+                "raw": "{\"message\":\"My message\",\n\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiam9tYmFAdXNlci5jb20iLCJleHAiOjE2ODI4NTk5NjJ9.zdAqEMrF6Xz72tJrHu0DIBe_ScDMeckuhUwpUkt5FuY\"\n}",
                 "form": []
             },
             "tests": []
@@ -268,12 +269,32 @@
             "method": "POST",
             "sortNum": 120000,
             "created": "2023-04-30T09:48:36.638Z",
-            "modified": "2023-04-30T11:17:59.218Z",
+            "modified": "2023-04-30T11:23:17.511Z",
+
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n \"vehicle_rego\" : \"TGZ582\",\n \"year\" : 2023,\n \"day\" :113,\n \"price\": 50,\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiam9tYmFAdXNlci5jb20iLCJleHAiOjE2ODI4NTQ3OTl9.vOYTqwvYII-EoetcvAvPxXCNyjjoxsR-gTBn9ydSsFo\"\n}",
+                "raw": "{\n \"vehicle_rego\" : \"TGZ582\",\n \"year\" : 2023,\n \"day\" :113,\n \"price\": 50,\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiam9tYmFAdXNlci5jb20iLCJleHAiOjE2ODI4NTUzMTZ9.xUZtYybl2PMSucSjKeI_VNI8QWU0SWyaUaosD3noBV0\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "0310bc91-1f54-4e12-8c55-ff762a56aa2c",
+            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
+            "containerId": "",
+            "name": "update profile get",
+            "url": "http://127.0.0.1:8080/update_profile",
+            "method": "GET",
+            "sortNum": 130000,
+            "created": "2023-04-30T12:44:22.213Z",
+            "modified": "2023-04-30T12:44:40.996Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiam9tYmFAdXNlci5jb20iLCJleHAiOjE2ODI4NTk5NjJ9.zdAqEMrF6Xz72tJrHu0DIBe_ScDMeckuhUwpUkt5FuY\"\n}",
                 "form": []
             },
             "tests": []

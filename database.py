@@ -202,6 +202,34 @@ def get_name_from_database(user_name):
         connection.close()
         return False
 
+def get_address_from_database(user_name):
+    """Gets the name from the User table in the database. Will get only the name.
+    @param user_name(string): The user name of the user, should be an email address.
+    @return: string containing the name.
+    """
+    global db_file
+
+    if not path.exists(db_file):
+        print("No database found")
+        return False
+
+    connection = connect(database=db_file)
+    db = connection.cursor()
+
+    sql_instruction = f"SELECT UserAddress FROM Users WHERE UserName = '{user_name}';"
+
+    try:
+        db.execute(sql_instruction)
+        result = db.fetchone()
+        db.close()
+        connection.close()
+        return result[0]
+    except:
+        print("Something went wrong")
+        db.close()
+        connection.close()
+        return False
+
 def add_user_to_database(user_name, user_password, name):
     """Adds a user to the User table in the database. Will add only the user_name and user_password.
     @param user_name(string): The user name of the user, should be an email address.
