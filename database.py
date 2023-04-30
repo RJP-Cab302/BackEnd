@@ -31,7 +31,7 @@ def create_database(db_name):
     db.close()
     connection.close()
 
-def add_vehicle_to_database(vehicle_rego, user_id, vehicle_type = "", vehicle_make = "", vehicle_model = ""):
+def add_vehicle_to_database(vehicle_rego, user_id, vehicle_type, vehicle_make, vehicle_model):
     """Adds a vehicle to the Vehicle table in the database. Will add only the vehicle_rego, vehicle_type, vehicle_make, vehicle_model, user_id.
     @param vehicle_rego(string): The registration of the vehicle.
     @param vehicle_type(string): The type of the vehicle.
@@ -563,10 +563,11 @@ def adjust_base_fare(year, day, new_base_fare):
     
         
 if __name__ == "__main__":
-    print(add_user_to_database("bob@user.com","password", "Bob"))
+    #print(add_user_to_database("bob@user.com","password", "Bob"))
     #print(get_user_id_from_database("tom@user.com"))
-    #print(add_vehicle_to_database("ABC-123",1))
+    print(add_vehicle_to_database("CBA-123",1))
     #print(get_vehicle_from_database_by_rego("ABC-123"))
+    print(get_vehicles_from_database_by_user_id(1))
     #print(delete_vehicle_from_database("CBA-321",1))
     #print(check_user_password_in_database("jim@user.com","password"))
     #print(delete_user_from_database("tim@user.com"))
@@ -576,5 +577,5 @@ if __name__ == "__main__":
     #print(get_booking_data_sold_spaces(2023, 120))
     #print(password_reset("jim@user.com","change","password"))
     #print(update_profile('jim@user.com','Jim','22 brisbane'))
-    print(get_name_from_database("bob@user.com"))
+    #print(get_name_from_database("bob@user.com"))
 
