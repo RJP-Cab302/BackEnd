@@ -427,7 +427,7 @@ def user_get_vehicle_endpoint():
 @cross_origin()
 @auth_required
 def booking():
-
+    print("here")
     if request.method == 'POST':
         content_type = request.headers.get('Content-Type')
 
@@ -463,22 +463,22 @@ def booking():
     user_name = jwt.decode(json_message['token'], SECRET_KEY, algorithms="HS256")["user"]
     user_id = get_user_id_from_database(user_name)
 
-    try:
-        if(parking_booking(user_id, json_message['vehicle_rego'], json_message['year'], json_message['day'], json_message['price'])):
-            bookingNumber = get_booking_number(user_id, json_message['vehicle_rego'], json_message['year'], json_message['day'], json_message['price'])
-            response = app.response_class(json.dumps({"message":"Booking has been made", "booking_number":bookingNumber, "code":200}),
-                                    status=200,
-                                    mimetype='application/json')
-            return response
-        else:
-            response = app.response_class(json.dumps({"message":"Booking already exits in the database", "code":401}),
-                        status=401,
-                        mimetype='application/json')
-            return response
-    except:
-        response = app.response_class(json.dumps({"message":"Sorry something went wrong trying to add the booking to the database", "code":401}),
-                        status=401,
-                        mimetype='application/json')
+    # try:
+    if(parking_booking(user_id, json_message['vehicle_rego'], json_message['year'], json_message['day'], json_message["base_fare"])):
+        bookingNumber = get_booking_number(user_id, json_message['vehicle_rego'], json_message['year'], json_message['day'], json_message["base_fare"])
+        response = app.response_class(json.dumps({"message":"Booking has been made", "booking_number":bookingNumber, "code":200}),
+                                status=200,
+                                mimetype='application/json')
+        return response
+    else:
+        response = app.response_class(json.dumps({"message":"Booking already exits in the database", "code":401}),
+                    status=401,
+                    mimetype='application/json')
+        return response
+    # except:
+    #     response = app.response_class(json.dumps({"message":"Sorry something went wrong trying to add the booking to the database", "code":401}),
+    #                     status=401,
+    #                     mimetype='application/json')
         return response
 
 def check_email(email):
