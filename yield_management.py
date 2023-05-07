@@ -2,6 +2,13 @@ import datetime
 import math
 from database import *
 
+#days within a year
+def days_in_year(year):
+    if year % 4 == 0 and (year % 100 != 0 or year % 400 == 0):
+        return 366
+    else:
+        return 365
+
 class Fare_Calculator:
     def __init__(self, base_fare, total_spaces, spaces_sold, day_of_sale, total_days_for_sale, max_price, min_price):
         self.base_fare = base_fare
