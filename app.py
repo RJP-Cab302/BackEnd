@@ -11,6 +11,7 @@ from database import create_booking_data, get_booking_data_sold_spaces, update_u
 from database import add_vehicle_to_database, delete_vehicle_from_database, get_user_id_from_database 
 from database import update_profile, get_name_from_database, get_vehicles_from_database_by_user_id 
 from database import parking_booking, get_booking_number,  get_address_from_database
+from yield_management import days_in_year
 
 from yield_management import Fare_Calculator
 from email_validator import validate_email, EmailNotValidError
@@ -285,6 +286,7 @@ def create_app():
             day_of_sale = day - current_day
             print("day_of_sale: ", day_of_sale)
 
+
             if(current_day > day):
                 response = app.response_class(json.dumps({"message":"Request Unuccessful, day requested is in the past","code":401}),
                     status=401,
@@ -301,6 +303,7 @@ def create_app():
             response = app.response_class(json.dumps({"message":"Sorry something went wrong, most likely no data for that day", "code":401}),
                         status=401,
                         mimetype='application/json')
+
         
         return response
 
@@ -471,8 +474,10 @@ def create_app():
                                 status=401,
                                 mimetype='application/json')
 
+
         user_name = jwt.decode(json_message['token'], SECRET_KEY, algorithms="HS256")["user"]
         user_id = get_user_id_from_database(user_name)
+
 
         # try:
         if(parking_booking(user_id, json_message['vehicle_rego'], json_message['year'], json_message['day'], json_message["base_fare"])):
@@ -480,6 +485,7 @@ def create_app():
             response = app.response_class(json.dumps({"message":"Booking has been made", "booking_number":bookingNumber, "code":200}),
                                     status=200,
                                     mimetype='application/json')
+
             return response
         else:
             response = app.response_class(json.dumps({"message":"Booking already exits in the database", "code":401}),
@@ -491,6 +497,7 @@ def create_app():
         #                     status=401,
         #                     mimetype='application/json')
             return response
+
 
     def check_email(email):
         try:    

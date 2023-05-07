@@ -451,7 +451,6 @@ def create_booking_data(year, day, base_fare, total_spaces, days_for_sale, max_p
     connection.close()
     
     if len(rows) == 0:
-        print("adding")
         connection = connect(database=db_file, timeout=5)
         db = connection.cursor()
         sql_instruction = f"INSERT INTO BookingData(Year, Day, BaseFare, TotalSpaces, SpacesSold, DaysForSale, MaxPrice, MinPrice) VALUES ({year}, {day},{base_fare}, {total_spaces}, {0} ,{days_for_sale}, {max_price}, {min_price});"
