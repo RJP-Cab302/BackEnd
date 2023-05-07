@@ -518,7 +518,29 @@ def get_booking_number(userID, rego, year, day, price):
         return False
 
 
+def cancel_booking(userID, rego, year, day):
+    global db_file
 
+    if not path.exists(db_file):
+        create_database(db_file)
+
+    connection = connect(database=db_file)
+    db = connection.cursor()
+
+    sql_instruction = f"DELETE FROM BookingTable WHERE UserId == '{userID}' and vehicleRego == '{rego}' and Year == '{year}' and Day == '{day}';"
+
+    try:
+        db.execute(sql_instruction)
+        connection.commit()
+        db.close()
+        connection.close()
+        return True
+    except:
+        print("Something went wrong")
+        db.close()
+        connection.close()
+        return False
+    
 def change_booking_data_sold_spaces(year, day, space_sold):
     """change_booking_data_sold_spaces _summary_
     Changes the sold spaces in the booking data for the given year and day.
@@ -656,16 +678,18 @@ if __name__ == "__main__":
     #print(delete_user_from_database("tim@user.com"))
     print(create_booking_data(2023,120,50,99,30,400,5))
     #adjust_base_fare(2023, 120, 150)
-    print()
+    #print()
     #print(change_booking_data_sold_spaces(2023,120,50))
-    print()
+    #print()
     #print(get_booking_data_sold_spaces(2023, 120))
     #print(password_reset("jim@user.com","change","password"))
     #print(update_profile('jim@user.com','Jim','22 brisbane'))
     #print(get_name_from_database("bob@user.com"))
-    print() 
-    print(parking_booking(1, "rego4", "2023", "181", "5"))
+    #print() 
+    #print(parking_booking(1, "rego4", 2023, 120, 50))
     #print(parking_booking(2, "test2", "2023", "180", "50"))
     #print(parking_booking(3, "rego3", "2023", "180", "50"))
-    #print(get_booking_number(1, "rego", "2023", "444", "50"))
+    print(get_booking_number(1, "rego4", "2023", "120", "50"))
+    print(cancel_booking(1, "rego4", 2023, 120))
+    #print(get_booking_number(1, "rego", "2023", "120", "50"))
 
