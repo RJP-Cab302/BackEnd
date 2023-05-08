@@ -557,7 +557,7 @@ def create_app():
     @app.route('/cancel_booking', methods=['DELETE'])
     @cross_origin()
     @auth_required
-    def cancel_booking():
+    def cancel_book():
         if request.method == 'DELETE':
             content_type = request.headers.get('Content-Type')
 
@@ -585,6 +585,12 @@ def create_app():
                                 status=401,
                                 mimetype='application/json')
 
+        if json_message["day"] > days_in_year(json_message["year"]):
+            response = app.response_class(json.dumps({"message":f"You did it wrong, there are only {days_in_year(json_message['year'])} in {json_message['year']}", "code":401}),
+                                status=401,
+                                mimetype='application/json')
+            return response
+        
         try:
             user_name = jwt.decode(json_message['token'], SECRET_KEY, algorithms="HS256")["user"]
             user_id = get_user_id_from_database(user_name)

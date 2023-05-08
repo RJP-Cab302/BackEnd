@@ -1,20 +1,20 @@
 {
     "client": "Thunder Client",
     "collectionName": "CAB302 Backend Testing",
-    "dateExported": "2023-05-07T15:50:14.284Z",
+    "dateExported": "2023-05-08T01:50:10.577Z",
     "version": "1.1",
     "folders": [],
     "requests": [
         {
-            "_id": "c51808f0-7666-45d7-b57d-4fbd3c54d123",
-            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
+            "_id": "ec736653-0c79-4fed-8ce3-00e2768cac73",
+            "colId": "b27491e3-57e4-43a2-bfdd-41e43b99dfb1",
             "containerId": "",
             "name": "Sign Up",
             "url": "localhost:8080/signup",
             "method": "POST",
             "sortNum": 10000,
-            "created": "2023-04-30T04:58:11.821Z",
-            "modified": "2023-04-30T04:58:11.821Z",
+            "created": "2023-05-08T01:25:46.565Z",
+            "modified": "2023-05-08T01:25:46.565Z",
             "headers": [
                 {
                     "name": "User-Agent",
@@ -31,15 +31,15 @@
             "tests": []
         },
         {
-            "_id": "00491de0-ef3f-4a27-8cc3-e12b1f5aa508",
-            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
+            "_id": "720740ec-0fb1-4005-9031-6c9d76c18eb2",
+            "colId": "b27491e3-57e4-43a2-bfdd-41e43b99dfb1",
             "containerId": "",
             "name": "Login",
             "url": "localhost:8080/login",
             "method": "GET",
             "sortNum": 20000,
-            "created": "2023-04-30T04:58:11.822Z",
-            "modified": "2023-04-30T04:58:11.822Z",
+            "created": "2023-05-08T01:25:46.566Z",
+            "modified": "2023-05-08T01:25:46.566Z",
             "headers": [],
             "params": [],
             "auth": {
@@ -52,15 +52,15 @@
             "tests": []
         },
         {
-            "_id": "4ff4f316-d0f0-4ecd-bd56-3ccf3978e6a5",
-            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
+            "_id": "0177e72a-ab83-44c1-8629-99b62afb85c8",
+            "colId": "b27491e3-57e4-43a2-bfdd-41e43b99dfb1",
             "containerId": "",
             "name": "Protected Example",
             "url": "localhost:8080/protected",
             "method": "GET",
             "sortNum": 30000,
-            "created": "2023-04-30T04:58:11.823Z",
-            "modified": "2023-04-30T12:40:07.000Z",
+            "created": "2023-05-08T01:25:46.567Z",
+            "modified": "2023-05-08T01:25:46.567Z",
             "headers": [
                 {
                     "name": "User-Agent",
@@ -77,15 +77,15 @@
             "tests": []
         },
         {
-            "_id": "83430e06-8c65-4a24-a840-7f9b2ab391ac",
-            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
+            "_id": "acc21ed8-565b-406b-a6f2-1d7df6d421ad",
+            "colId": "b27491e3-57e4-43a2-bfdd-41e43b99dfb1",
             "containerId": "",
             "name": "Create Booking Data",
             "url": "localhost:8080/create_booking_data",
             "method": "POST",
             "sortNum": 40000,
-            "created": "2023-04-30T04:58:11.824Z",
-            "modified": "2023-04-30T04:58:11.824Z",
+            "created": "2023-05-08T01:25:46.568Z",
+            "modified": "2023-05-08T01:25:46.568Z",
             "headers": [
                 {
                     "name": "User-Agent",
@@ -102,15 +102,15 @@
             "tests": []
         },
         {
-            "_id": "ecd0759c-f128-49cf-8cd2-eebc994d382c",
-            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
+            "_id": "c650230e-3861-4d3e-a958-b0c0131d69eb",
+            "colId": "b27491e3-57e4-43a2-bfdd-41e43b99dfb1",
             "containerId": "",
             "name": "Get Price",
             "url": "localhost:8080/get_day_price",
             "method": "POST",
             "sortNum": 50000,
-            "created": "2023-04-30T04:58:11.825Z",
-            "modified": "2023-04-30T04:58:11.825Z",
+            "created": "2023-05-08T01:25:46.569Z",
+            "modified": "2023-05-08T01:25:46.569Z",
             "headers": [
                 {
                     "name": "User-Agent",
@@ -127,15 +127,15 @@
             "tests": []
         },
         {
-            "_id": "0779c23d-b4ee-421b-94c7-28f3e80617cd",
-            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
+            "_id": "3715dcc5-bd3c-400d-ad7f-1778e375aa1f",
+            "colId": "b27491e3-57e4-43a2-bfdd-41e43b99dfb1",
             "containerId": "",
             "name": "Basic Get Test",
             "url": "localhost:8080",
             "method": "GET",
             "sortNum": 60000,
-            "created": "2023-04-30T04:58:11.826Z",
-            "modified": "2023-04-30T04:58:11.826Z",
+            "created": "2023-05-08T01:25:46.570Z",
+            "modified": "2023-05-08T01:25:46.570Z",
             "headers": [
                 {
                     "name": "User-Agent",
@@ -152,15 +152,15 @@
             "tests": []
         },
         {
-            "_id": "d7f22958-92fb-4dcf-8b42-7dcdd889ba34",
-            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
+            "_id": "00560d83-ce29-4e21-b486-9fe6bd781831",
+            "colId": "b27491e3-57e4-43a2-bfdd-41e43b99dfb1",
             "containerId": "",
             "name": "Delete user",
             "url": "localhost:8080/delete",
             "method": "DELETE",
             "sortNum": 70000,
-            "created": "2023-04-30T04:58:11.827Z",
-            "modified": "2023-04-30T04:58:11.827Z",
+            "created": "2023-05-08T01:25:46.571Z",
+            "modified": "2023-05-08T01:25:46.571Z",
             "headers": [],
             "params": [],
             "body": {
@@ -178,15 +178,15 @@
             "tests": []
         },
         {
-            "_id": "5a5b7b6a-0ef3-497a-81a8-a01db6588f81",
-            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
+            "_id": "cda77fd5-4971-4e08-b335-9a3886d3c7c4",
+            "colId": "b27491e3-57e4-43a2-bfdd-41e43b99dfb1",
             "containerId": "",
             "name": "Update User",
             "url": "localhost:8080/update_profile",
             "method": "POST",
             "sortNum": 80000,
-            "created": "2023-04-30T04:58:11.828Z",
-            "modified": "2023-04-30T04:58:11.828Z",
+            "created": "2023-05-08T01:25:46.572Z",
+            "modified": "2023-05-08T01:25:46.572Z",
             "headers": [],
             "params": [],
             "body": {
@@ -197,15 +197,15 @@
             "tests": []
         },
         {
-            "_id": "afe1e0e9-91aa-4124-b934-939feab7eb61",
-            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
+            "_id": "cdfc1ae4-5099-4177-a37f-ba955679a607",
+            "colId": "b27491e3-57e4-43a2-bfdd-41e43b99dfb1",
             "containerId": "",
             "name": "add_vehicle",
             "url": "localhost:8080/add_vehicle",
             "method": "POST",
             "sortNum": 90000,
-            "created": "2023-04-30T04:58:11.829Z",
-            "modified": "2023-04-30T04:59:40.405Z",
+            "created": "2023-05-08T01:25:46.573Z",
+            "modified": "2023-05-08T01:25:46.573Z",
             "headers": [
                 {
                     "name": "User-Agent",
@@ -222,15 +222,15 @@
             "tests": []
         },
         {
-            "_id": "de7d1d2f-dfc0-4931-9f26-5ba6c7c0d96f",
-            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
+            "_id": "d0ea6ef6-8c2d-4b2e-8db2-bf6fc6c309de",
+            "colId": "b27491e3-57e4-43a2-bfdd-41e43b99dfb1",
             "containerId": "",
             "name": "delete_vehicle",
             "url": "localhost:8080/delete_vehicle",
             "method": "DELETE",
             "sortNum": 100000,
-            "created": "2023-04-30T04:58:11.830Z",
-            "modified": "2023-04-30T04:58:11.830Z",
+            "created": "2023-05-08T01:25:46.574Z",
+            "modified": "2023-05-08T01:25:46.574Z",
             "headers": [],
             "params": [],
             "body": {
@@ -241,15 +241,15 @@
             "tests": []
         },
         {
-            "_id": "4dbac935-1c3d-43b3-889a-2b2028fdebd4",
-            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
+            "_id": "564b1550-0573-43ac-a09c-694be0b684e9",
+            "colId": "b27491e3-57e4-43a2-bfdd-41e43b99dfb1",
             "containerId": "",
             "name": "user_get_vehicles",
             "url": "localhost:8080/user_get_vehicles",
             "method": "POST",
             "sortNum": 110000,
-            "created": "2023-04-30T04:58:11.831Z",
-            "modified": "2023-04-30T04:58:11.831Z",
+            "created": "2023-05-08T01:25:46.575Z",
+            "modified": "2023-05-08T01:25:46.575Z",
             "headers": [],
             "params": [],
             "body": {
@@ -260,34 +260,34 @@
             "tests": []
         },
         {
-            "_id": "ac66d97b-d641-420c-8abe-714353807a94",
-            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
+            "_id": "ccbebdf7-209a-4a84-b4ee-fde07c8f6ab2",
+            "colId": "b27491e3-57e4-43a2-bfdd-41e43b99dfb1",
             "containerId": "",
             "name": "make a booking",
             "url": "http://127.0.0.1:8080/booking",
             "method": "POST",
             "sortNum": 120000,
-            "created": "2023-04-30T09:48:36.638Z",
-            "modified": "2023-05-07T15:41:12.968Z",
+            "created": "2023-05-08T01:25:46.577Z",
+            "modified": "2023-05-08T01:34:40.942Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n \"vehicle_rego\" : \"TGZ582\",\n \"year\" : 2023,\n \"day\" :113,\n \"base_fare\": 50,\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiam9tYmFAdXNlci5jb20iLCJleHAiOjE2ODM0NzU4NjF9.3k4ck0bwjo2VjH2187SF7klvJayjKpI-fgnIf_MeD8w\"\n}",
+                "raw": "{\n \"vehicle_rego\" : \"TGZ582\",\n \"year\" : 2023,\n \"day\" :113,\n \"base_fare\": 50,\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiam9tYmFAdXNlci5jb20iLCJleHAiOjE2ODM1MTE0NTl9.pmqeKDmcY0fbUBu9Mto6sqQw8vMOFvu6SqnKKWhJSEg\"\n}",
                 "form": []
             },
             "tests": []
         },
         {
-            "_id": "0310bc91-1f54-4e12-8c55-ff762a56aa2c",
-            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
+            "_id": "9708504b-6fd2-4456-9b9e-84191a687f55",
+            "colId": "b27491e3-57e4-43a2-bfdd-41e43b99dfb1",
             "containerId": "",
             "name": "update profile get",
             "url": "http://127.0.0.1:8080/update_profile",
             "method": "GET",
             "sortNum": 130000,
-            "created": "2023-04-30T12:44:22.213Z",
-            "modified": "2023-04-30T12:44:40.996Z",
+            "created": "2023-05-08T01:25:46.578Z",
+            "modified": "2023-05-08T01:25:46.578Z",
             "headers": [],
             "params": [],
             "body": {
@@ -298,20 +298,39 @@
             "tests": []
         },
         {
-            "_id": "6d86eed0-6f2f-4bbd-9f41-8760264334ce",
-            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
+            "_id": "85a17db3-49c2-4028-9845-7c7d0eec5686",
+            "colId": "b27491e3-57e4-43a2-bfdd-41e43b99dfb1",
             "containerId": "",
             "name": "check booking",
             "url": "http://127.0.0.1:8080/booking_check",
             "method": "POST",
             "sortNum": 140000,
-            "created": "2023-05-07T15:10:57.349Z",
-            "modified": "2023-05-07T15:41:42.252Z",
+            "created": "2023-05-08T01:25:46.579Z",
+            "modified": "2023-05-08T01:45:25.127Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n \"vehicle_rego\" : \"TGZ582\",\n \"year\" : 2023,\n \"day\" :113,\n \"base_fare\": 50,\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiam9tYmFAdXNlci5jb20iLCJleHAiOjE2ODM0NzU4NjF9.3k4ck0bwjo2VjH2187SF7klvJayjKpI-fgnIf_MeD8w\"\n}",
+                "raw": "{\n \"vehicle_rego\" : \"TGZ582\",\n \"year\" : 2023,\n \"day\" :113,\n \"base_fare\": 50,\n   \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiam9tYmFAdXNlci5jb20iLCJleHAiOjE2ODM1MTE4NjV9._m4Gvnwxhn4AhNjpumU48TVeLxlvoBWVo3iN569vNbE\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "0a66f1d0-2956-4343-9f8d-8f1bb45aa78d",
+            "colId": "b27491e3-57e4-43a2-bfdd-41e43b99dfb1",
+            "containerId": "",
+            "name": "cancel booking",
+            "url": "http://127.0.0.1:8080/cancel_booking",
+            "method": "DELETE",
+            "sortNum": 150000,
+            "created": "2023-05-08T01:26:25.373Z",
+            "modified": "2023-05-08T01:34:57.698Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n \"vehicle_rego\" : \"TGZ582\",\n \"year\" : 2023,\n \"day\" :113,\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiam9tYmFAdXNlci5jb20iLCJleHAiOjE2ODM1MTE0NTl9.pmqeKDmcY0fbUBu9Mto6sqQw8vMOFvu6SqnKKWhJSEg\"\n}",
                 "form": []
             },
             "tests": []
