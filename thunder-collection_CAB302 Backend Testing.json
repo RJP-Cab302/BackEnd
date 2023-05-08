@@ -1,8 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "CAB302 Backend Testing",
-
-    "dateExported": "2023-04-30T12:44:50.801Z",
+    "dateExported": "2023-05-07T15:50:14.284Z",
     "version": "1.1",
     "folders": [],
     "requests": [
@@ -269,13 +268,12 @@
             "method": "POST",
             "sortNum": 120000,
             "created": "2023-04-30T09:48:36.638Z",
-            "modified": "2023-04-30T11:23:17.511Z",
-
+            "modified": "2023-05-07T15:41:12.968Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n \"vehicle_rego\" : \"TGZ582\",\n \"year\" : 2023,\n \"day\" :113,\n \"price\": 50,\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiam9tYmFAdXNlci5jb20iLCJleHAiOjE2ODI4NTUzMTZ9.xUZtYybl2PMSucSjKeI_VNI8QWU0SWyaUaosD3noBV0\"\n}",
+                "raw": "{\n \"vehicle_rego\" : \"TGZ582\",\n \"year\" : 2023,\n \"day\" :113,\n \"base_fare\": 50,\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiam9tYmFAdXNlci5jb20iLCJleHAiOjE2ODM0NzU4NjF9.3k4ck0bwjo2VjH2187SF7klvJayjKpI-fgnIf_MeD8w\"\n}",
                 "form": []
             },
             "tests": []
@@ -295,6 +293,25 @@
             "body": {
                 "type": "json",
                 "raw": "{\n \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiam9tYmFAdXNlci5jb20iLCJleHAiOjE2ODI4NTk5NjJ9.zdAqEMrF6Xz72tJrHu0DIBe_ScDMeckuhUwpUkt5FuY\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "6d86eed0-6f2f-4bbd-9f41-8760264334ce",
+            "colId": "238e637d-7747-46c3-a7b8-617dcda326f5",
+            "containerId": "",
+            "name": "check booking",
+            "url": "http://127.0.0.1:8080/booking_check",
+            "method": "POST",
+            "sortNum": 140000,
+            "created": "2023-05-07T15:10:57.349Z",
+            "modified": "2023-05-07T15:41:42.252Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n \"vehicle_rego\" : \"TGZ582\",\n \"year\" : 2023,\n \"day\" :113,\n \"base_fare\": 50,\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiam9tYmFAdXNlci5jb20iLCJleHAiOjE2ODM0NzU4NjF9.3k4ck0bwjo2VjH2187SF7klvJayjKpI-fgnIf_MeD8w\"\n}",
                 "form": []
             },
             "tests": []
