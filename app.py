@@ -9,6 +9,8 @@ from constraints import SECRET_KEY
 from database import add_user_to_database, check_user_password_in_database, delete_user_from_database 
 from database import create_booking_data, get_booking_data_sold_spaces, update_user_address_to_database 
 from database import add_vehicle_to_database, delete_vehicle_from_database, get_user_id_from_database 
+from database import update_profile, get_name_from_database, get_vehicles_from_database_by_user_id , cancel_booking
+from database import parking_booking, get_booking_number,  get_address_from_database
 from database import update_profile, get_name_from_database, get_vehicles_from_database_by_user_id 
 from database import parking_booking, get_booking_number, get_address_from_database, check_booking_pass
 from yield_management import days_in_year
@@ -550,6 +552,65 @@ def create_app():
                         status=401,
                         mimetype='application/json')
             return response
+        
+    
+    @app.route('/cancel_booking', methods=['DELETE'])
+    @cross_origin()
+    @auth_required
+    def cancel_book():
+        if request.method == 'DELETE':
+            content_type = request.headers.get('Content-Type')
+
+        if (content_type == 'application/json'):
+            json_message = request.json
+        else:
+            response = app.response_class(json.dumps({"message":"You did it wrong, needs JSON", "code":401}),
+                                        status=401,
+                                        mimetype='application/json')
+            return response
+
+        if "vehicle_rego" not in json_message.keys():
+            response = app.response_class(json.dumps({"message":"You did it wrong, needs vehicle_rego field", "code":401}),
+                                status=401,
+                                mimetype='application/json')
+            return response
+            
+        if "year" not in json_message.keys():
+            response = app.response_class(json.dumps({"message":"You did it wrong, needs year field", "code":401}),
+                                status=401,
+                                mimetype='application/json')
+
+        if "day" not in json_message.keys():
+            response = app.response_class(json.dumps({"message":"You did it wrong, needs day field", "code":401}),
+                                status=401,
+                                mimetype='application/json')
+
+        if json_message["day"] > days_in_year(json_message["year"]):
+            response = app.response_class(json.dumps({"message":f"You did it wrong, there are only {days_in_year(json_message['year'])} in {json_message['year']}", "code":401}),
+                                status=401,
+                                mimetype='application/json')
+            return response
+        
+        try:
+            user_name = jwt.decode(json_message['token'], SECRET_KEY, algorithms="HS256")["user"]
+            user_id = get_user_id_from_database(user_name)
+            if cancel_booking(user_id, json_message['vehicle_rego'], json_message['year'], json_message['day']):
+                response = app.response_class(json.dumps({"message":"Booking has been canceled", "code":200}),
+                                        status=200,
+                                        mimetype='application/json')
+            else:
+                response = app.response_class(json.dumps({"message":"Booking is not canceled, might not be in database", "code":401}),
+                                        status=401,
+                                        mimetype='application/json')
+        except:
+            print("big boo boo")
+            response = app.response_class(json.dumps({"message":"Sorry something went wrong trying to delete the vehicle from the database", "code":401}),
+                        status=401,
+                        mimetype='application/json')
+
+        return response
+
+        
 
     def check_email(email):
         try:    

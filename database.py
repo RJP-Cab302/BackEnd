@@ -533,6 +533,30 @@ def check_booking_pass(userID, rego, year, day, price):
         print("something went wrong")
         return False
 
+    
+def cancel_booking(userID, rego, year, day):
+    global db_file
+    if not path.exists(db_file):
+        create_database(db_file)
+
+    connection = connect(database=db_file)
+    db = connection.cursor()
+
+    sql_instruction = f"DELETE FROM BookingTable WHERE UserId == '{userID}' and vehicleRego == '{rego}' and Year == '{year}' and Day == '{day}';"
+
+    try:
+        db.execute(sql_instruction)
+        connection.commit()
+        db.close()
+        connection.close()
+        return True
+    except:
+        print("Something went wrong")
+        db.close()
+        connection.close()
+        return False
+
+    
 def change_booking_data_sold_spaces(year, day, space_sold):
     """change_booking_data_sold_spaces _summary_
     Changes the sold spaces in the booking data for the given year and day.
@@ -582,6 +606,7 @@ def change_booking_data_sold_spaces(year, day, space_sold):
 
     print("Booking data does not have a matching day to update")
     return False
+
 
 def get_booking_data_sold_spaces(year, day):
     """get_booking_data_sold_spaces _summary_ gets all the booking data for a selected year day
@@ -681,7 +706,13 @@ if __name__ == "__main__":
     print(parking_booking(1, "rego4", 2023, 120, 50))
     #print(parking_booking(2, "test2", "2023", "180", "50"))
     #print(parking_booking(3, "rego3", "2023", "180", "50"))
-    print(get_booking_number(1, "rego4", 2023, 120, 50))
-    print(check_booking_pass(1, "rego4", 2023, 120, 50))
-    print(parking_booking(1, "rego4", 2023, 120, 50))
+    print(get_booking_number(1, "rego4", "2023", "120", "50"))
+    print(cancel_booking(1, "rego4", 2023, 120))
+    #print(get_booking_number(1, "rego", "2023", "120", "50"))
+    #print(parking_booking(1, "rego4", 2023, 120, 50))
+    #print(parking_booking(2, "test2", "2023", "180", "50"))
+    #print(parking_booking(3, "rego3", "2023", "180", "50"))
+    #print(get_booking_number(1, "rego4", 2023, 120, 50))
+    #print(check_booking_pass(1, "rego4", 2023, 120, 50))
+    #print(parking_booking(1, "rego4", 2023, 120, 50))
 
